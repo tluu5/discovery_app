@@ -10,4 +10,7 @@
 #
 class Attribute < ApplicationRecord
   has_many :location_activities, class_name: "LocationAttribute", foreign_key: "attribute_id", dependent: :destroy
+
+  validates :category, presence: true
+  validates :name, presence: true
 end

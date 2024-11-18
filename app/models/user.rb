@@ -26,4 +26,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :favorites, class_name: "Favorite", foreign_key: "user_id", dependent: :destroy
+
+  validates :username, presence: true, uniqueness: true
 end

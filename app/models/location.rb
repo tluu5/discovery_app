@@ -14,4 +14,8 @@
 class Location < ApplicationRecord
   has_many :favorites, class_name: "Favorite", foreign_key: "location_id", dependent: :destroy
   has_many :location_activities, class_name: "LocationAttribute", foreign_key: "location_id", dependent: :destroy
+
+  validates :address, presence: true
+  validates :description, presence: true
+  validates :name, presence: true
 end
