@@ -26,6 +26,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :favorites, class_name: "Favorite", foreign_key: "user_id", dependent: :destroy
+  has_many :favorite_locations, through: :favorites, source: :location
 
-  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { minimum: 6 }
 end

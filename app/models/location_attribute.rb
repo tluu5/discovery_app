@@ -10,5 +10,9 @@
 #
 class LocationAttribute < ApplicationRecord
   belongs_to :location, required: true, class_name: "Location", foreign_key: "location_id"
-  belongs_to :activity, required: true, class_name: "Attribute", foreign_key: "attribute_id"
+  belongs_to :attribute, required: true, class_name: "Attribute", foreign_key: "attribute_id"
+
+  validates :location_id, presence: true
+  validates :attribute_id, presence: true
+  validates :attribute_id, uniqueness: { scope: :location_id, message: "This attribute is already associated with the location" }
 end

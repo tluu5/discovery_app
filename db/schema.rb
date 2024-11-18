@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_18_172142) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_18_222922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -39,8 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_18_172142) do
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.integer "latitude"
-    t.integer "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

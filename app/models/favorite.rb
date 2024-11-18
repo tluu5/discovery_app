@@ -11,4 +11,8 @@
 class Favorite < ApplicationRecord
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
   belongs_to :location, required: true, class_name: "Location", foreign_key: "location_id"
+
+  validates :user_id, presence: true
+  validates :location_id, presence: true
+  validates :user_id, uniqueness: { scope: :location_id, message: "You have already favorited this location" } 
 end
