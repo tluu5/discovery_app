@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <title>Outdoor Activity Discovery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Discover the best outdoor locations and activities near you.">
+    <meta charset="utf-8">
+    <html lang="en">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+      <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+      <%= javascript_importmap_tags %>
+    </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <body>
+      <header>
+        <nav class="main-nav">
+          <% if user_signed_in? %>
+            <div class="nav-container">
+              <p>Welcome, <%= current_user.email %>!</p>
+              <div class="user-actions">
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary", aria: { label: "Logout" } %>
+              </div>
+            </div>
 
-    <% if current_user&.admin? %>
-      <nav>
-        <%= link_to "Admin Locations", admin_locations_path %> |
-        <%= link_to "Admin Users", admin_users_path %>
-      </nav>
-    <% end %>
-    
-    <%= yield %>
-  </body>
-</html>
+            <% if current_user&.admin? %>
+              <div class="admin-links">
+                <%= link_to "Admin Locations", admin_locations_path %> |
+                <%= link_to "Admin Users", admin_users_path %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="nav-container">
+              <%= link_to "Login", new_user_session_path, class: "btn btn-secondary", aria: { label: "Login" } %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary", aria: { label: "Sign Up" } %>
+            </div>
+          <% end %>
+        </nav>
+      </header>
+
+      <main>
+        <%= yield %>
+      </main>
+    </body>
+
+  </html>
