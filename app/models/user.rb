@@ -28,6 +28,9 @@ class User < ApplicationRecord
   has_many :favorites, class_name: "Favorite", foreign_key: "user_id", dependent: :destroy
   has_many :favorite_locations, through: :favorites, source: :location
 
+  # Ensure email is present, unique, and correctly formatted
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  # Ensure password is present and has a minimum length
   validates :password, presence: true, length: { minimum: 6 }
 end

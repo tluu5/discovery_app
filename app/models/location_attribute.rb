@@ -2,17 +2,24 @@
 #
 # Table name: location_attributes
 #
-#  id           :bigint           not null, primary key
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  attribute_id :integer
-#  location_id  :integer
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  feature_id  :integer          not null
+#  location_id :integer          not null
+#
+# Indexes
+#
+#  index_location_attributes_on_location_id_and_feature_id  (location_id,feature_id) UNIQUE
 #
 class LocationAttribute < ApplicationRecord
-  belongs_to :location, required: true, class_name: "Location", foreign_key: "location_id"
-  belongs_to :attribute, required: true, class_name: "Attribute", foreign_key: "attribute_id"
+  belongs_to :location
+  belongs_to :feature, class_name: 'Attribute', foreign_key: 'feature_id'
 
+  # Ensure location and feature (attribute) are present
   validates :location_id, presence: true
-  validates :attribute_id, presence: true
-  validates :attribute_id, uniqueness: { scope: :location_id, message: "This attribute is already associated with the location" }
+  validates :feature, presence: true
+
+  # Ensure a location cannot have duplicate attributes
+  validates :feature_id, uniqueness: { scope: :location_id, message: "This attribute is already associated with the location" }
 end
