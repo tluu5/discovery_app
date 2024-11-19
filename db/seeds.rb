@@ -56,7 +56,7 @@ locations = Location.create!([
 
 puts "Created #{Location.count} locations!"
 
-# Assign attributes to locations
+# Assign features to locations
 LocationAttribute.create!([
   { location: locations[0], feature: attributes[0] }, # Lincoln Park has Hiking Trail
   { location: locations[0], feature: attributes[4] }, # Lincoln Park has Picnic Area

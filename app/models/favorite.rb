@@ -13,13 +13,9 @@
 #  index_favorites_on_user_id_and_location_id  (user_id,location_id) UNIQUE
 #
 class Favorite < ApplicationRecord
-  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
-  belongs_to :location, required: true, class_name: "Location", foreign_key: "location_id"
-
-  # Ensure user and location are present
-  validates :user_id, presence: true
-  validates :location_id, presence: true
+  belongs_to :user
+  belongs_to :location
 
   # Ensure a user cannot favorite the same location multiple times
-  validates :location_id, uniqueness: { scope: :location_id, message: "You have already favorited this location" } 
+  validates :user_id, uniqueness: { scope: :location_id, message: "You have already favorited this location" }
 end
