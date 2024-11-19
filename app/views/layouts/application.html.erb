@@ -13,6 +13,13 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <% if current_user&.admin? %>
+      <nav>
+        <%= link_to "Admin Locations", admin_locations_path %> |
+        <%= link_to "Admin Users", admin_users_path %>
+      </nav>
+    <% end %>
     
     <%= yield %>
   </body>

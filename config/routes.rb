@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  resources :favorites, only: [:create, :destroy]
-  resources :attributes
-  resources :location_attributes
-  resources :locations
   devise_for :users
 
-  root "locations#index" # Set the homepage
-  
-  def admin?
-    self.admin
+  # Root route
+  root "locations#index"
+
+  # Nested routes for favorites
+  resources :locations do
+    resources :favorites, only: [:create, :destroy]
+  end
+
+  # Additional resources
+  resources :attributes, except: [:edit]
+  resources :location_attributes, only: [:create, :destroy]
+
+  # Admin-specific routes
+  namespace :admin do
+    resources :locations
+    resources :users
   end
 end
