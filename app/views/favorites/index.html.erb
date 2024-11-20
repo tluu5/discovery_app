@@ -1,14 +1,24 @@
-<h1>Your Favorite Locations</h1>
+<div class="container mt-5">
+  <h1>Your Favorite Locations</h1>
 
-<% if @favorites.any? %>
-  <ul>
-    <% @favorites.each do |favorite| %>
-      <li>
-        <strong><%= favorite.location.name %></strong> - <%= favorite.location.address %>
-        <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no favorite locations yet.</p>
-<% end %>
+  <% if @favorites.any? %>
+    <div class="row">
+      <% @favorites.each do |favorite| %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><%= favorite.location.name %></h5>
+              <p class="card-text">
+                <strong>Address:</strong> <%= favorite.location.address %><br>
+                <strong>Description:</strong> <%= favorite.location.description %>
+              </p>
+              <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You have no favorite locations yet.</p>
+  <% end %>
+</div>

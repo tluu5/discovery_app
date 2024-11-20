@@ -1,0 +1,7 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title"><%= location.name %></h5>
+    <p class="card-text"><%= truncate(location.description, length: 100) %></p>
+    <%= link_to "View Details", location_path(location), class: "btn btn-primary" %>
+  </div>
+</div>

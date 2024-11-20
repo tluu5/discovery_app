@@ -12,18 +12,15 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header>
       <!-- Fixed Navigation Bar -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
-          <%= link_to "Outdoor Activity Discovery", root_path, class: "navbar-brand" %>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <%= link_to "Outdoor Discovery", root_path, class: "navbar-brand" %>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <!-- Home Link (always visible) -->
@@ -64,6 +61,5 @@
     <main class="container mt-5">
       <%= yield %>
     </main>
-
   </body>
 </html>

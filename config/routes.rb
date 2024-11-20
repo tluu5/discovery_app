@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  resources :favorites, only: [:index]
-
   resources :locations do
-    collection do
-      get :search
-    end
+    resource :favorite, only: [:create, :destroy]
   end
 
+  resources :favorites, only: [:index] 
+
   devise_for :users
-  
+
   root 'locations#index'
 
   # Additional resources
