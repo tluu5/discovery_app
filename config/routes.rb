@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :favorites, only: [:index]
 
-  # Root route
-  root "locations#index"
-
-  # Nested routes for favorites
   resources :locations do
-    resources :favorites, only: [:create, :destroy]
+    collection do
+      get :search
+    end
   end
+
+  devise_for :users
+  
+  root 'locations#index'
 
   # Additional resources
   resources :attributes, except: [:edit]

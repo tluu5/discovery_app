@@ -1,9 +1,10 @@
 class FavoritesController < ApplicationController
   before_action :set_favorite, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /favorites or /favorites.json
   def index
-    @favorites = Favorite.all
+    @favorites = current_user.favorites
   end
 
   # GET /favorites/1 or /favorites/1.json
