@@ -2,10 +2,18 @@
 
 <div id="locations">
   <% @locations.each do |location| %>
-    <%= render location %>
-    <p>
-      <%= link_to "Show this location", location %>
-    </p>
+    <div class="container mt-5">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= location.name %></h5>
+          <p class="card-text">
+            <strong>Address:</strong> <%= location.address %><br>
+            <strong>Description:</strong> <%= location.description %>
+          </p>
+          <%= link_to "View Details", location_path(location), class: "btn btn-info" %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 
