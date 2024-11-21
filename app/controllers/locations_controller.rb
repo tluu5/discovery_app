@@ -4,10 +4,14 @@ class LocationsController < ApplicationController
   # GET /locations or /locations.json
   def index
     @locations = Location.all
+    @locations = @locations.joins(:attributes).where(attributes: { name: params[:activity] }) if params[:activity].present?
+    @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%") if params[:search].present?
   end
 
   # GET /locations/1 or /locations/1.json
   def show
+    @location = Location.find(params[:id])
+    @map_data = { lat: @location.latitude, lng: @location.longitude }
   end
 
   # GET /locations/new

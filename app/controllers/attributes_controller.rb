@@ -1,6 +1,11 @@
 class AttributesController < ApplicationController
   before_action :set_attribute, only: %i[ show edit update destroy ]
 
+  def available
+    @attributes = Attribute.all
+    render json: @attributes
+  end  
+
   # GET /attributes or /attributes.json
   def index
     @attributes = Attribute.all

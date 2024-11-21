@@ -22,15 +22,18 @@ class FavoritesController < ApplicationController
   # POST /favorites or /favorites.json
   def create
     location = Location.find(params[:location_id])
-    @favorite = current_user.favorites.build(location: location)
-
-    if @favorite.save
-      flash[:notice] = "Location added to your favorites!"
+    if current_user.favorites.exists?(location_id: location.id)
+      flash[:notice] = "Location already in your favorites."
     else
-      flash[:alert] = "There was an issue adding this location to your favorites."
+      favorite = current_user.favorites.new(location: location)
+      if favorite.save
+        flash[:success] = "Location added to favorites."
+      else
+        flash[:error] = "Could not add to favorites."
+      end
     end
-    redirect_back(fallback_location: root_path)
-  end
+    redirect_to locations_path
+  end  
 
   # PATCH/PUT /favorites/1 or /favorites/1.json
   def update

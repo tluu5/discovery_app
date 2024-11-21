@@ -1,5 +1,15 @@
 <h1>Locations</h1>
 
+<%= form_with url: locations_path, method: :get, local: true do %>
+  <%= label_tag :search, "Search by Name" %>
+  <%= text_field_tag :search, params[:search] %>
+
+  <%= label_tag :activity, "Filter by Activity" %>
+  <%= select_tag :activity, options_from_collection_for_select(Attribute.all, :name, :name), include_blank: true %>
+
+  <%= submit_tag "Search" %>
+<% end %>
+
 <div class="row">
   <% @locations.each do |location| %>
     <%= render partial: 'locations/location_card', locals: { location: location } %>

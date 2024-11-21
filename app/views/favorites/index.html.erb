@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h1>Your Favorite Locations</h1>
+  <h1>Your Favorites</h1>
 
   <% if @favorites.any? %>
     <div class="row">
@@ -7,12 +7,19 @@
         <div class="col-md-4">
           <div class="card mb-4">
             <div class="card-body">
-              <h5 class="card-title"><%= favorite.location.name %></h5>
+              <h5 class="card-title"><%= link_to favorite.location.name, location_path(favorite.location) %></h5>
               <p class="card-text">
                 <strong>Address:</strong> <%= favorite.location.address %><br>
                 <strong>Description:</strong> <%= favorite.location.description %>
               </p>
               <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
+              <% if user_signed_in? %>
+                <% if current_user.favorites.exists?(location: @location) %>
+                  <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger' %>
+                <% else %>
+                  <%= button_to 'Add to Favorites', location_favorite_path(favorite.location), method: :post, class: 'btn btn-primary' %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

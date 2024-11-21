@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   root 'locations#index'
 
   # Additional resources
-  resources :attributes, except: [:edit]
+  resources :attributes do
+    collection do
+      get :available
+    end
+  end  
   resources :location_attributes, only: [:create, :destroy]
 
   # Admin-specific routes
