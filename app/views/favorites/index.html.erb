@@ -15,9 +15,9 @@
               <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
               <% if user_signed_in? %>
                 <% if current_user.favorites.exists?(location: @location) %>
-                  <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger' %>
-                <% else %>
                   <%= button_to 'Add to Favorites', location_favorite_path(favorite.location), method: :post, class: 'btn btn-primary' %>
+                <% else %>
+                  <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger' %>
                 <% end %>
               <% end %>
             </div>
