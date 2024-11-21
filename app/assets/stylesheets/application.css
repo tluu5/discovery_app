@@ -24,16 +24,13 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: #fff;
-  border: 1px solid transparent;
+  background-color: #228B22; /* Forest Green */
+  border-color: #228B22;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
-  color: #fff;
-  transform: scale(1.05);
-  transition: all 0.3s ease;
+  background-color: #87CEEB; /* Sky Blue on hover */
+  border-color: #87CEEB;
 }
 
 .btn-secondary {
@@ -55,9 +52,31 @@
   margin-bottom: 15px;
 }
 
+.navbar {
+  background-color: #228B22; /* Forest Green */
+}
+
+.navbar a.nav-link {
+  color: #F5F5F5; /* White text for contrast */
+}
+
+.navbar a.nav-link:hover {
+  color: #87CEEB; /* Sky Blue for hover effect */
+}
+
 /* User Actions */
 .user-actions {
   margin-left: auto; /* Push logout button to the right */
+}
+
+.card {
+  background-color: #F5F5F5;
+  border: 1px solid #8B4513; /* Earth Brown border */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  background-color: #F4A460; /* Sand Yellow for a warm touch */
 }
 
 /* Admin Links */
@@ -67,8 +86,9 @@
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  line-height: 1.7;
+  background-color: #F5F5F5; /* Cloud White for background */
+  color: #333; /* Standard text color for readability */
+  font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3 {

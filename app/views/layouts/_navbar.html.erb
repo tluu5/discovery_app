@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <%= link_to "Outdoor Discovery", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Favorites", favorites_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+          <% if current_user&.admin? %>
+            <!-- Admin Links (visible only for admin users) -->
+            <li class="nav-item">
+              <%= link_to "Admin Locations", admin_locations_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Admin Users", admin_users_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
