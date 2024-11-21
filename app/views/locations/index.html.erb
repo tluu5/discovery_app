@@ -1,6 +1,6 @@
 <h1>Locations</h1>
 
-<div class="d-flex flex-wrap">
+<div class="row">
   <% @locations.each do |location| %>
     <%= render partial: 'locations/location_card', locals: { location: location } %>
   <% end %>
