@@ -8,7 +8,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f5f5f5 !important; /* Light gray for a subtle nature-themed background */
-  color: #333 !important;
+  color: #333;
   padding-top: 70px; /* Offset to ensure content doesn't get blocked by the fixed navbar */
 }
 
@@ -94,6 +94,22 @@ a:hover {
 
 .row {
   margin-bottom: 20px;
+}
+
+.form-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.form-inputs {
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  text-align: center;
 }
 
 /* Flash Messages Styling */
