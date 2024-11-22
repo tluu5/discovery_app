@@ -33,4 +33,11 @@ class User < ApplicationRecord
 
   # Ensure password is present and has a minimum length
   validates :password, presence: true, length: { minimum: 6 }
+
+  def update(params)
+    super
+  rescue => e
+    Rails.logger.debug "Validation errors: #{errors.full_messages}"
+    raise e
+  end
 end
