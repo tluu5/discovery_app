@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   end  
   resources :location_attributes, only: [:create, :destroy]
 
-  # Admin-specific routes
-  namespace :admin do
-    resources :locations
-    resources :users
-  end
+  authenticate :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :locations
+      resources :users
+    end
+  end  
 end

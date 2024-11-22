@@ -24,9 +24,9 @@ class Location < ApplicationRecord
   # Ensure name, address, latitude, and longitude are present
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
   validates :address, presence: true
-  validates :latitude, presence: true, numericality: true
-  validates :longitude, presence: :true, numericality: true
+  validates :latitude, presence: true, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }
+  validates :longitude, presence: true, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }
 
   # Ensure description is optional but limited in length if provided
-  validates :description, presence: true, length: { maximum: 500 }
+  validates :description, length: { maximum: 500 }
 end

@@ -31,8 +31,15 @@ class User < ApplicationRecord
   # Ensure email is present, unique, and correctly formatted
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  # Ensure password is present and has a minimum length
-  validates :password, presence: true, length: { minimum: 6 }
+  # Ensure username is present and unique
+  validates :username, presence: true, uniqueness: true
+
+  # Ensure password is present and has a minimum length, with stronger requirements
+  validates :password, presence: true, length: { minimum: 8 }, format: { with: /(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/,
+    message: "must include at least one uppercase letter, one digit, and one special character" }
+
+  # Ensure admin is set to false by default
+  attribute :admin, :boolean, default: false
 
   def update(params)
     super

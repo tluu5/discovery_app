@@ -1,9 +1,9 @@
-<h1 class="my-4 text-center">Editing Location</h1>
+<h1 class="my-4 text-center">Editing Location: <%= @location.name %></h1>
+
 <p class="text-center text-muted">Update the details for the selected location below.</p>
 
 <%= render "form", location: @location %>
 
 <div class="text-center mt-4">
-  <%= link_to "Show this Location", @location, class: "btn btn-link" %> |
-  <%= link_to "Back to Locations", locations_path, class: "btn btn-link" %>
+  <%= link_to "Back to Locations", locations_path, class: "btn btn-secondary" %>
 </div>
