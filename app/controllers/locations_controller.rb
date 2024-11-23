@@ -4,25 +4,26 @@ class LocationsController < ApplicationController
   # GET /locations or /locations.json
   def index
     @locations = Location.all
-
+  
     # Filter by activity
-    if params[:activity].present?
-      @locations = @locations.joins(:activities).where(attributes: { name: params[:activity], category: "Activity" })
+    if params[:activities].present?
+      @locations = @locations.joins(location_attributes: :feature)
+                             .where(attributes: { name: params[:activities], category: 'Activity' })
+                             .distinct
     end
-
+  
     # Filter by amenities
     if params[:amenities].present?
-      # Use multiple joins if multiple amenities are selected
-      Array(params[:amenities]).each do |amenity|
-        @locations = @locations.joins(:amenities).where(attributes: { name: amenity, category: "Amenity" })
-      end
+      @locations = @locations.joins(location_attributes: :feature)
+                             .where(attributes: { name: params[:amenities], category: 'Amenity' })
+                             .distinct
     end
-
+  
     # Search by name
     if params[:search].present?
       @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
     end
-  end
+  end  
 
   # GET /locations/1 or /locations/1.json
   def show

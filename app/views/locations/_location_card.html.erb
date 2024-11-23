@@ -6,12 +6,22 @@
 
       <%# Display Activities %>
       <p class="card-text">
-        Activities: <%= location.activities.map(&:name).join(', ') %>
+        Activities: 
+        <% if location.activities.any? %>
+          <%= location.activities.map(&:name).join(', ') %>
+        <% else %>
+          None
+        <% end %>
       </p>
 
       <%# Display Amenities %>
       <p class="card-text">
-        Amenities: <%= location.amenities.map(&:name).join(', ') %>
+        Amenities: 
+        <% if location.amenities.any? %>
+          <%= location.amenities.map(&:name).join(', ') %>
+        <% else %>
+          None
+        <% end %>
       </p>
 
       <%= link_to 'View Location', location_path(location), class: 'btn btn-primary' %>
