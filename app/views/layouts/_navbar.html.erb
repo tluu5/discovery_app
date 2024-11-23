@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <%= link_to "Outdoor Discovery", root_path, class: "navbar-brand" %>
+    <% if user_signed_in? %>
+      <span class="navbar-text text-light ms-3">Welcome, <%= current_user.username %>!</span>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
