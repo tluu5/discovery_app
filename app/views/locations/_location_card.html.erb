@@ -1,11 +1,21 @@
 <div class="col-md-4">
   <div class="card mb-4">
     <div class="card-body">
-      <h5 id="location-title-<%= location.id %>" class="card-title"><%= location.name %></h5>
+      <h5 class="card-title"><%= location.name %></h5>
+      <p class="card-text"><%= location.description %></p>
+
+      <%# Display Activities %>
       <p class="card-text">
-        <strong>Description:</strong> <%= location.description %>
+        Activities: <%= location.activities.map(&:name).join(', ') %>
       </p>
-      <%= link_to "View Location", location_path(location), class: "btn btn-info" %>
+
+      <%# Display Amenities %>
+      <p class="card-text">
+        Amenities: <%= location.amenities.map(&:name).join(', ') %>
+      </p>
+
+      <%= link_to 'View Location', location_path(location), class: 'btn btn-primary' %>
     </div>
   </div>
+
 </div>
