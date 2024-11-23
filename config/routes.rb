@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:index] 
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }  
 
   root 'locations#index'
 
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
 
   authenticate :user, lambda { |u| u.admin? } do
     namespace :admin do
-      resources :locations
+      resources :locations, only: [:index, :new, :create, :edit, :update, :destroy]
       resources :users
     end
   end  

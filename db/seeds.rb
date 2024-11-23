@@ -9,12 +9,12 @@ puts "All data cleared!"
 
 # Create users
 users = User.create!([
-  { email: 'john.doe@example.com', password: 'password', admin: false },
-  { email: 'jane.smith@example.com', password: 'password', admin: false },
-  { email: 'admin@example.com', password: 'password', admin: true },
-  { email: 'alice.brown@example.com', password: 'password', admin: false },
-  { email: 'bob.jones@example.com', password: 'password', admin: false },
-  { email: 'charlie.davis@example.com', password: 'password', admin: false }
+  { email: 'john.doe@example.com', username: 'johndoe', password: 'Password1!', admin: false },
+  { email: 'jane.smith@example.com', username: 'janesmith', password: 'Password2!', admin: false },
+  { email: 'admin@example.com', username: 'adminuser', password: 'Password3!', admin: true },
+  { email: 'alice.brown@example.com', username: 'alicebrown', password: 'Password4!', admin: false },
+  { email: 'bob.jones@example.com', username: 'bobjones', password: 'Password5!', admin: false },
+  { email: 'charlie.davis@example.com', username: 'charliedavis', password: 'Password6!', admin: false }
 ])
 
 puts "Created #{User.count} users!"

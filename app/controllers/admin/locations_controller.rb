@@ -1,6 +1,7 @@
 class Admin::LocationsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_admin
+  before_action :set_location, only: [:edit, :update, :destroy]
 
   def index
     @locations = Location.all
@@ -29,7 +30,25 @@ class Admin::LocationsController < ApplicationController
     end
   end
 
+  def update
+    if @location.update(location_params)
+      redirect_to admin_locations_path, notice: "Location updated successfully."
+    else
+      render :edit, alert: "Failed to update location."
+    end
+  end
+
+  def show
+
+  end
+
   private
+
+  def set_location
+    @location = Location.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to admin_locations_path, alert: "Location not found."
+  end
 
   def location_params
     params.require(:location).permit(:name, :address, :latitude, :longitude, :description)

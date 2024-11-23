@@ -1,24 +1,4 @@
 <h1>Add New Location</h1>
 <%= form_with model: @location, url: admin_locations_path do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-  <div>
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude %>
-  </div>
-  <div>
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude %>
-  </div>
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-  <%= form.submit "Create Location" %>
+  <%= render "form", location: @location %>
 <% end %>
