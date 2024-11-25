@@ -16,10 +16,13 @@
 #  index_locations_on_name  (name) UNIQUE
 #
 class Location < ApplicationRecord
-  has_many :favorites, class_name: "Favorite", foreign_key: "location_id", dependent: :destroy
-  has_many :location_attributes
-  has_many :users, through: :favorites
+  has_many :favorites, dependent: :destroy
+  has_many :location_attributes, dependent: :destroy
   has_many :features, through: :location_attributes, source: :feature
+
+  # Activities and Amenities associations
+  has_many :activities, -> { where(attributes: { category: 'Activity' }) }, through: :location_attributes, source: :feature
+  has_many :amenities, -> { where(attributes: { category: 'Amenity' }) }, through: :location_attributes, source: :feature
 
   # Ensure name, address, latitude, and longitude are present
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
