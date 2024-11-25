@@ -51,8 +51,8 @@ class Admin::LocationsController < ApplicationController
   end
 
   def location_params
-    params.require(:location).permit(:name, :address, :latitude, :longitude, :description)
-  end
+    params.require(:location).permit(:name, :address, :latitude, :longitude, :description, activities: [], amenities: [], images: [])
+  end  
 
   def ensure_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.admin?

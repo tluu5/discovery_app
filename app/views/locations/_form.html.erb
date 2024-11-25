@@ -1,4 +1,4 @@
-<%= simple_form_for(@location, html: { class: 'form-container' }) do |f| %>
+<%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -22,8 +22,8 @@
       <div>
         <% Attribute.where(category: 'Activity').each do |activity| %>
           <div class="form-check">
-            <%= check_box_tag "location[activities][]", activity.name, @location.activities.include?(activity), class: "form-check-input" %>
-            <%= label_tag "location_activities_#{activity.name}", activity.name, class: "form-check-label" %>
+            <%= check_box_tag "location[activities][]", activity.id, @location.activities.include?(activity), class: "form-check-input" %>
+            <%= label_tag "location_activities_#{activity.id}", activity.name, class: "form-check-label" %>
           </div>
         <% end %>
       </div>
@@ -34,11 +34,16 @@
       <div>
         <% Attribute.where(category: 'Amenity').each do |amenity| %>
           <div class="form-check">
-            <%= check_box_tag "location[amenities][]", amenity.name, @location.amenities.include?(amenity), class: "form-check-input" %>
-            <%= label_tag "location_amenities_#{amenity.name}", amenity.name, class: "form-check-label" %>
+            <%= check_box_tag "location[amenities][]", amenity.id, @location.amenities.include?(amenity), class: "form-check-input" %>
+            <%= label_tag "location_amenities_#{amenity.id}", amenity.name, class: "form-check-label" %>
           </div>
         <% end %>
       </div>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :images, "Upload Images" %>
+      <%= f.file_field :images, multiple: true, class: "form-control" %>
     </div>
   </div>
 

@@ -16,6 +16,7 @@
 #  index_locations_on_name  (name) UNIQUE
 #
 class Location < ApplicationRecord
+  has_many_attached :images
   has_many :favorites, dependent: :destroy
   has_many :location_attributes, dependent: :destroy
   has_many :features, through: :location_attributes, source: :feature

@@ -1,5 +1,8 @@
 <div class="col-md-4">
   <div class="card mb-4">
+    <% if location.images.attached? %>
+      <%= image_tag location.images.first.variant(resize_to_limit: [400, 300]), class: "card-img-top", alt: location.name %>
+    <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= location.name %></h5>
       <p class="card-text"><%= location.description %></p>
@@ -27,5 +30,4 @@
       <%= link_to 'View Location', location_path(location), class: 'btn btn-primary' %>
     </div>
   </div>
-
 </div>

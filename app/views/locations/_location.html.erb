@@ -24,4 +24,23 @@
     <%= location.description %>
   </p>
 
+  <%# Display Activities %>
+  <p>
+    <strong>Activities:</strong>
+    <% if location.activities.any? %>
+      <%= location.activities.map(&:name).join(', ') %>
+    <% else %>
+      None
+    <% end %>
+  </p>
+
+  <%# Display Amenities %>
+  <p>
+    <strong>Amenities:</strong>
+    <% if location.amenities.any? %>
+      <%= location.amenities.map(&:name).join(', ') %>
+    <% else %>
+      None
+    <% end %>
+  </p>
 </div>

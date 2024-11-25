@@ -1,5 +1,13 @@
 <%= render @location %>
 
+<% if @location.images.attached? %>
+  <div class="mb-4">
+    <% @location.images.each do |image| %>
+      <%= image_tag image.variant(resize_to_limit: [800, 600]), class: "img-fluid mb-3", alt: @location.name %>
+    <% end %>
+  </div>
+<% end %>
+
 <% if user_signed_in? %>
   <% if current_user.favorites.exists?(location: @location) %>
     <%= button_to 'Remove from Favorites', location_favorite_path(@location), method: :delete, class: 'btn btn-danger' %>
