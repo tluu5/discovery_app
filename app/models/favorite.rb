@@ -16,6 +16,10 @@ class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :location
 
+  # Ensure user and location are present
+  validates :user_id, presence: true
+  validates :location_id, presence: true
+
   # Ensure a user cannot favorite the same location multiple times
   validates :user_id, uniqueness: { scope: :location_id, message: "You have already favorited this location" }
 end

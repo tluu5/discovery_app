@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1>Your Favorites</h1>
 
-<h1>Favorites</h1>
-
-<div id="favorites">
-  <% @favorites.each do |favorite| %>
-    <%= render favorite %>
-    <p>
-      <%= link_to "Show this favorite", favorite %>
-    </p>
+  <% if @favorites.any? %>
+    <div class="row">
+      <% @favorites.each do |favorite| %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to favorite.location.name, location_path(favorite.location) %></h5>
+              <p class="card-text">
+                <strong>Address:</strong> <%= favorite.location.address %><br>
+                <strong>Description:</strong> <%= favorite.location.description %>
+              </p>
+              <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
+              <% if user_signed_in? %>
+                <% if current_user.favorites.exists?(location: favorite.location) %>
+                  <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger' %>
+                <% else %>
+                  <%= button_to 'Add to Favorites', location_favorite_path(favorite.location), method: :post, class: 'btn btn-primary' do %>
+                    <i class="fas fa-heart"></i> Add to Favorites
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You have no favorite locations yet. <%= link_to 'Explore locations', locations_path, class: 'btn btn-info mr-2' %> to add your favorites!</p>
   <% end %>
 </div>
-
-<%= link_to "New favorite", new_favorite_path %>

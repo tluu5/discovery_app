@@ -1,10 +1,10 @@
-<h1>Editing attribute</h1>
+<h1>Editing Attribute: <%= @attribute.name %></h1>
 
 <%= render "form", attribute: @attribute %>
 
 <br>
 
-<div>
-  <%= link_to "Show this attribute", @attribute %> |
-  <%= link_to "Back to attributes", attributes_path %>
+<div class="mt-4">
+  <%= link_to "Show this attribute", @attribute, class: "btn btn-info mr-2" %>
+  <%= link_to "Back to attributes", attributes_path, class: "btn btn-info mr-2" %>
 </div>

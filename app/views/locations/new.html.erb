@@ -1,9 +1,8 @@
-<h1>New location</h1>
+<h1 class="my-4 text-center">Add a New Location</h1>
+<p class="text-center text-muted">Please fill in the details below to add a new location to the map.</p>
 
 <%= render "form", location: @location %>
 
-<br>
-
-<div>
-  <%= link_to "Back to locations", locations_path %>
+<div class="text-center mt-4">
+  <%= link_to "Back to Locations", locations_path, class: "btn btn-info mr-2" %>
 </div>

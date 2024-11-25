@@ -3,13 +3,19 @@ class Admin::UsersController < ApplicationController
   before_action :ensure_admin
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10) # Add pagination to improve performance
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path, notice: "User deleted successfully."
+
+    if @user == current_user
+      redirect_to admin_users_path, alert: "You cannot delete your own account."
+    elsif @user.destroy
+      redirect_to admin_users_path, notice: "User deleted successfully."
+    else
+      redirect_to admin_users_path, alert: "Failed to delete user. It might be associated with other records."
+    end
   end
 
   private

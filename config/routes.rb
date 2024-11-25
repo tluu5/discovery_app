@@ -1,21 +1,37 @@
 Rails.application.routes.draw do
-  devise_for :users
-
   # Root route
-  root "locations#index"
+  root 'locations#index'
 
-  # Nested routes for favorites
+  # Devise Routes (Custom Controller for Registrations)
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+  # Locations Routes
   resources :locations do
-    resources :favorites, only: [:create, :destroy]
+    resource :favorite, only: [:create, :destroy]
+
+    # Filter is part of the index action, so no need for a separate route
   end
 
-  # Additional resources
-  resources :attributes, except: [:edit]
+  # Favorites index (list of user's favorite locations)
+  resources :favorites, only: [:index]
+
+  # Attributes are used to show available activities/amenities (collection level route)
+  resources :attributes, only: [] do
+    collection do
+      get :available
+    end
+  end
+
+  # LocationAttributes management
   resources :location_attributes, only: [:create, :destroy]
 
-  # Admin-specific routes
-  namespace :admin do
-    resources :locations
-    resources :users
+  # Admin namespace with authentication restriction
+  authenticate :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :locations, only: [:index, :new, :create, :edit, :update, :destroy]
+      resources :users
+    end
   end
 end

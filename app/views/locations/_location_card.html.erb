@@ -1,0 +1,31 @@
+<div class="col-md-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title"><%= location.name %></h5>
+      <p class="card-text"><%= location.description %></p>
+
+      <%# Display Activities %>
+      <p class="card-text">
+        Activities: 
+        <% if location.activities.any? %>
+          <%= location.activities.map(&:name).join(', ') %>
+        <% else %>
+          None
+        <% end %>
+      </p>
+
+      <%# Display Amenities %>
+      <p class="card-text">
+        Amenities: 
+        <% if location.amenities.any? %>
+          <%= location.amenities.map(&:name).join(', ') %>
+        <% else %>
+          None
+        <% end %>
+      </p>
+
+      <%= link_to 'View Location', location_path(location), class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+</div>
