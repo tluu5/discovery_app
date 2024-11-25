@@ -1,13 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Locations</h1>
 
-<div id="locations">
+<div class="row">
   <% @locations.each do |location| %>
-    <%= render location %>
-    <p>
-      <%= link_to "Show this location", location %>
-    </p>
+    <%= render partial: 'locations/location_card', locals: { location: location } %>
   <% end %>
 </div>
 
