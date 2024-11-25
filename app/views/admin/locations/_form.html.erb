@@ -1,4 +1,4 @@
-<%= simple_form_for(@location, html: { class: 'form-container' }) do |f| %>
+<%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -40,6 +40,11 @@
         <% end %>
       </div>
     </div>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :images, "Upload Images" %>
+    <%= f.file_field :images, multiple: true, class: "form-control" %>
   </div>
 
   <div class="form-actions mt-4">
