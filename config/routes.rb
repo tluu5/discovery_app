@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :users
 
-  # This is a blank app! Pick your first screen, build out the RCAV, and go from there. E.g.:
+  # Root route
+  root "locations#index"
 
-  # get "/your_first_screen" => "pages#first"
-  
+  # Nested routes for favorites
+  resources :locations do
+    resources :favorites, only: [:create, :destroy]
+  end
+
+  # Additional resources
+  resources :attributes, except: [:edit]
+  resources :location_attributes, only: [:create, :destroy]
+
+  # Admin-specific routes
+  namespace :admin do
+    resources :locations
+    resources :users
+  end
 end

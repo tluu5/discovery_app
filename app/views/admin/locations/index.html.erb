@@ -1,0 +1,11 @@
+<h1>Admin: Locations</h1>
+<%= link_to "Add New Location", new_admin_location_path %>
+<ul>
+  <% @locations.each do |location| %>
+    <li>
+      <%= location.name %>
+      <%= link_to "Edit", edit_admin_location_path(location) %> |
+      <%= link_to "Delete", admin_location_path(location), method: :delete, data: { confirm: "Are you sure?" } %>
+    </li>
+  <% end %>
+</ul>

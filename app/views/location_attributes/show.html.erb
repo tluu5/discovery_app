@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @location_attribute %>
+
+<div>
+  <%= link_to "Edit this location attribute", edit_location_attribute_path(@location_attribute) %> |
+  <%= link_to "Back to location attributes", location_attributes_path %>
+
+  <%= button_to "Destroy this location attribute", @location_attribute, method: :delete %>
+</div>
