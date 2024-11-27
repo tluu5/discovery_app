@@ -19,7 +19,7 @@
   <div class="form-group mr-2">
     <%= label_tag :amenities, "Filter by Amenities", class: "mr-2" %>
     <div>
-      <% ['Picnic Area', 'Dog-Friendly', 'BBQ Grills', 'Public Restrooms'].each do |amenity| %>
+      <% ['Picnic Area', 'Dog-Friendly', 'BBQ Grills', 'Public Restrooms', 'Hiking Trail', 'Playground'].each do |amenity| %>
         <div class="form-check form-check-inline">
           <%= check_box_tag "amenities[]", amenity, params[:amenities]&.include?(amenity), class: "form-check-input" %>
           <%= label_tag "amenity_#{amenity}", amenity, class: "form-check-label" %>
