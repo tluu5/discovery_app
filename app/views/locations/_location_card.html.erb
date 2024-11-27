@@ -1,7 +1,11 @@
 <div class="col-md-4">
   <div class="card mb-4">
     <% if location.images.attached? %>
-      <%= image_tag location.images.first.variant(resize_to_limit: [400, 300]), class: "card-img-top", alt: location.name %>
+      <div class="mb-4">
+        <% location.images.each do |image| %>
+          <%= image_tag image, class: "img-fluid mb-3", alt: location.name %>
+        <% end %>
+      </div>
     <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= location.name %></h5>
