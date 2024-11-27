@@ -42,6 +42,25 @@
     </div>
   </div>
 
+  <!-- Existing Images -->
+  <div class="col-12 mt-4">
+    <h5>Existing Images</h5>
+    <% if @location.images.attached? %>
+      <% @location.images.each do |image| %>
+        <div class="mb-3">
+          <%= image_tag image, class: "img-thumbnail", style: "max-width: 150px;" %>
+          <div class="form-check">
+            <%= check_box_tag "location[remove_images][]", image.blob.id, false, class: "form-check-input" %>
+            <%= label_tag "location_remove_images_#{image.blob.id}", "Remove this image", class: "form-check-label" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No images available.</p>
+    <% end %>
+  </div>
+
+  <!-- Upload New Images -->
   <div class="col-12">
     <%= f.label :images, "Upload Images" %>
     <%= f.file_field :images, multiple: true, class: "form-control" %>
