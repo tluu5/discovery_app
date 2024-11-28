@@ -6,12 +6,21 @@
     <div class="col-md-12">
       <%= f.input :name, label: "Location Name", placeholder: "Enter the name of the location", input_html: { class: "form-control" } %>
     </div>
-    <div class="col-md-8">
-      <%= f.input :address, label: "Address", placeholder: "e.g., 123 Main St, Chicago, IL", input_html: { class: "form-control" } %>
+    <div class="col-md-12">
+      <%= f.input :address, label: "Street Address", placeholder: "e.g., 123 Main St", input_html: { class: "form-control" } %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :city, label: "City", placeholder: "Enter the city", input_html: { class: "form-control" } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :state, label: "State", placeholder: "Enter the state", input_html: { class: "form-control" } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :zip_code, label: "Zip Code", placeholder: "Enter the zip code", input_html: { class: "form-control" } %>
     </div>
     <div class="col-md-4">
-      <%= f.input :latitude, label: "Latitude", placeholder: "Enter the latitude", input_html: { class: "form-control" } %>
-      <%= f.input :longitude, label: "Longitude", placeholder: "Enter the longitude", input_html: { class: "form-control" } %>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :longitude %>
     </div>
     <div class="col-12">
       <%= f.input :description, label: "Description", placeholder: "Provide a brief description of the location", input_html: { class: "form-control", rows: 3 } %>

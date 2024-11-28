@@ -30,6 +30,48 @@ User Reviews: Read and leave reviews on different outdoor spots.
 
 Admin Tools: Admins can add, edit, or remove location entries to keep the database accurate and up-to-date. They can also moderate user reviews.
 
+User Stories
+
+Users:
+
+Find outdoor spots in Chicago based on preferred activities.
+
+Filter locations by features and facilities (e.g., restrooms, picnic areas).
+
+Save favorite spots and view them later.
+
+Read and leave reviews for locations.
+
+Discover nearby spots using a map view.
+
+Admins:
+
+Manage location details to ensure accuracy.
+
+Moderate user reviews.
+
+Domain Model
+
+Entities:
+
+User: id, admin, email, username, created_at, updated_at
+
+Location: id, name, address, latitude, longitude, description, created_at, updated_at
+
+Attribute: id, name, category, created_at, updated_at
+
+Favorite: id, location_id, user_id, created_at, updated_at
+
+Location_Attribute: id, location_id, feature_id, created_at, updated_at
+
+Associations:
+
+A User can have many Favorites.
+
+A Location can belong to many Favorites.
+
+A Location can have many Attributes through Location_Attribute.
+
 Setup and Installation Instructions
 
 To get the project running locally, follow these steps:
@@ -59,11 +101,15 @@ Open your browser and navigate to http://localhost:3000.
 
 Configuration
 
-Environment Variables: Create a .env file in the root directory to set up environment variables like the Google Maps API key:
+Environment Variables
+
+Create a .env file in the root directory to set up environment variables like the Google Maps API key:
 
 GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
-Database Configuration: The database uses PostgreSQL. Ensure that your local environment has PostgreSQL installed and running.
+Database Configuration
+
+The database uses PostgreSQL. Ensure that your local environment has PostgreSQL installed and running.
 
 Contribution Guidelines
 
@@ -93,12 +139,6 @@ Branch naming convention: feature/your-feature-name or bugfix/your-bugfix-name.
 
 Write clear commit messages.
 
-Entity Relationship Diagram (ERD)
-
-Below is the ERD for the project:
-
-The diagram illustrates the relationships between the entities in the database, including Users, Locations, Attributes, Favorites, and Location Attributes.
-
 Troubleshooting
 
 If you encounter any issues, here are some common troubleshooting tips:
@@ -111,7 +151,7 @@ Dependencies: If there are issues with dependencies, try running bundle install 
 
 Visual Aids
 
-Home Page Sketch: A search bar and filters for activities and features.
+Home Page: A search bar and filters for activities and features.
 
 Location Details Page: Displays the location’s name, description, map, and user reviews.
 
@@ -135,4 +175,4 @@ Authentication: Use an API key for admin-related actions. Include the key in the
 
 Contact
 
-Created by Brian Luu - feel free to reach out if you have questions or feedback!!!
+Created by Brian Luu - feel free to reach out if you have questions or feedback!

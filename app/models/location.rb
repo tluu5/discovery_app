@@ -4,10 +4,13 @@
 #
 #  id          :bigint           not null, primary key
 #  address     :string           not null
+#  city        :string
 #  description :string
 #  latitude    :float            not null
 #  longitude   :float            not null
 #  name        :string           not null
+#  state       :string
+#  zip_code    :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -33,4 +36,13 @@ class Location < ApplicationRecord
 
   # Ensure description is optional but limited in length if provided
   validates :description, length: { maximum: 500 }
+
+   # Geocode
+   geocoded_by :full_address
+   after_validation :geocode, if: ->(obj){ obj.address_changed? || obj.city_changed? || obj.state_changed? || obj.zip_code_changed? }
+ 
+   # Custom method to combine address fields
+   def full_address
+     "#{address}, #{city}, #{state}, #{zip_code}"
+   end
 end
