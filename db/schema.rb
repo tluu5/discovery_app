@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_28_044305) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_28_185312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -75,10 +75,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_28_044305) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "city"
-    t.string "state"
-    t.string "zip_code"
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "zip_code", null: false
+    t.index ["city"], name: "index_locations_on_city"
     t.index ["name"], name: "index_locations_on_name", unique: true
+    t.index ["state"], name: "index_locations_on_state"
+    t.index ["zip_code"], name: "index_locations_on_zip_code"
   end
 
   create_table "users", force: :cascade do |t|
