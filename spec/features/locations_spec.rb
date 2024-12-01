@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Locations Management', type: :feature do
   before do
-    # Create an admin user
+    # Create an admin user and log in
     User.create!(
       email: 'admin@example.com',
       username: 'AdminUser',
@@ -62,21 +62,21 @@ RSpec.describe 'Locations Management', type: :feature do
     visit new_admin_location_path
     click_button 'Create Location' # Submit the form without filling fields
   
-    # Check for validation error messages with the actual formatting
-    expect(page).to have_content("Location Namecan't be blank")
-    expect(page).to have_content("Addresscan't be blank")
-    expect(page).to have_content("Latitudecan't be blank")
-    expect(page).to have_content("Longitudecan't be blank")
-  end  
+    # Check for validation error messages with consistent formatting
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Address can't be blank")
+    expect(page).to have_content("Latitude can't be blank")
+    expect(page).to have_content("Longitude can't be blank")
+  end   
 
   it 'deletes a location successfully' do
     location = Location.create!(name: 'Sample Location', address: '123 Street', latitude: 40.7128, longitude: -74.0060)
-
+  
     visit admin_locations_path
     click_link 'Delete', href: admin_location_path(location)
-
-    # Check that the location is removed
-    expect(page).to have_content('Location was successfully destroyed.')
+  
+    # Check that the correct success message is displayed
+    expect(page).to have_content('Location deleted successfully.')
     expect(page).not_to have_content('Sample Location')
-  end
+  end  
 end

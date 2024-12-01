@@ -1,6 +1,14 @@
 <%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <% if @location.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There were problems with the following fields:</h4>
+      <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="form-inputs row g-3">
     <div class="col-md-12">
