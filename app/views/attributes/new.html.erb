@@ -1,12 +1,44 @@
 <h1>Add a New Attribute</h1>
 <p class="text-muted">Please fill out the form below to create a new attribute.</p>
 
+<% if @attribute.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@attribute.errors.count, "error") %> prohibited this attribute from being saved:</h4>
+    <ul>
+      <% @attribute.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @attribute, local: true do |form| %>
+  <% if @attribute.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@attribute.errors.count, "error") %> prohibited this attribute from being saved:</h4>
+      <ul>
+        <% @attribute.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "Attribute Name" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :category, "Category" %>
+    <%= form.text_field :category, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Attribute", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
 <div class="mt-4">
-  <%= link_to "Back to attributes", attributes_path, class: "btn btn-info mr-2" %>
-</div>
-
-<br>
-
-<div>
-  <%= link_to "Back to attributes", attributes_path %>
+  <%= link_to "Back to attributes", attributes_path, class: "btn btn-info" %>
 </div>

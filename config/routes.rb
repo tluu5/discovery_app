@@ -10,15 +10,13 @@ Rails.application.routes.draw do
   # Locations Routes
   resources :locations do
     resource :favorite, only: [:create, :destroy]
-
-    # Filter is part of the index action, so no need for a separate route
   end
 
   # Favorites index (list of user's favorite locations)
   resources :favorites, only: [:index]
 
-  # Attributes are used to show available activities/amenities (collection level route)
-  resources :attributes, only: [] do
+  # Attributes Routes
+  resources :attributes, only: [:index, :new, :create, :edit, :update, :destroy] do
     collection do
       get :available
     end

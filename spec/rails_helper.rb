@@ -5,6 +5,7 @@ require_relative "../config/environment"
 require "capybara/rails"
 require "capybara/rspec"
 require 'database_cleaner/active_record'
+require 'factory_bot_rails'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
@@ -27,11 +28,28 @@ end
 # Configure Capybara to use Safari for JavaScript tests
 Capybara.javascript_driver = :selenium_safari
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 RSpec.configure do |config|
   # Save test results and stop on first failure (optional)
   config.example_status_persistence_file_path = 'spec/examples.txt'
   config.fail_fast = false
   config.formatter = :documentation
+
+  config.include FactoryBot::Syntax::Methods
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.include Warden::Test::Helpers, type: :feature
+  config.after(:each, type: :feature) do
+    Warden.test_reset!
+  end
 
   # Capybara DSL globally accessible
   config.include Capybara::DSL
