@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    email { "user@example.com" }
-    username { "TestUser" }
-    password { "Password1!" }
+    sequence(:email) { |n| "user#{n}@example.com" } # Unique emails
+    sequence(:username) { |n| "username#{n}" }     # Unique usernames
+    password { "SecureP@ssw0rd!" }
     admin { false }
 
     trait :admin do

@@ -1,6 +1,16 @@
 <h1 class="my-4 text-center">Editing Location: <%= @location.name %></h1>
-
 <p class="text-center text-muted">Update the details for the selected location below.</p>
+
+<div class="alert alert-danger">
+  <% if @location.errors.any? %>
+    <h4>There were problems with the following fields:</h4>
+    <ul>
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= render "form", location: @location %>
 

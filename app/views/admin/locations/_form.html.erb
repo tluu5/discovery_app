@@ -1,14 +1,14 @@
 <%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
-  <% if @location.errors.any? %>
-    <div class="alert alert-danger">
+  <div class="alert alert-danger">
+    <% if @location.errors.any? %>
       <h4>There were problems with the following fields:</h4>
       <ul>
         <% @location.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="form-inputs row g-3">
     <div class="col-md-12">

@@ -1,45 +1,46 @@
 class Admin::LocationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_admin
-  before_action :set_location, only: [:edit, :update, :destroy]
+  before_action :authorize_admin
+  before_action :set_location, only: %i[edit update destroy]
 
+  # GET /admin/locations
   def index
     @locations = Location.all
   end
 
+  # GET /admin/locations/new
   def new
     @location = Location.new
   end
 
+  # POST /admin/locations
   def create
     @location = Location.new(location_params)
     if @location.save
       redirect_to admin_locations_path, notice: "Location created successfully."
     else
-      flash.now[:alert] = @location.errors.full_messages.join(", ")
+      flash.now[:alert] = @location.errors.full_messages.to_sentence
       render :new
     end
   end
 
-  def destroy
-    @location = Location.find(params[:id])
-    if @location.destroy
-      redirect_to admin_locations_path, notice: "Location deleted successfully."
-    else
-      redirect_to admin_locations_path, alert: "Failed to delete location. It might be associated with other records."
-    end
-  end
-
+  # PATCH/PUT /admin/locations/:id
   def update
     if @location.update(location_params)
       redirect_to admin_locations_path, notice: "Location updated successfully."
     else
-      render :edit, alert: "Failed to update location."
+      flash.now[:alert] = @location.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
-  def show
-
+  # DELETE /admin/locations/:id
+  def destroy
+    if @location.destroy
+      redirect_to admin_locations_path, notice: "Location deleted successfully."
+    else
+      redirect_to admin_locations_path, alert: "Failed to delete location. It may be associated with other records."
+    end
   end
 
   private
@@ -51,10 +52,15 @@ class Admin::LocationsController < ApplicationController
   end
 
   def location_params
-    params.require(:location).permit(:name, :address, :latitude, :longitude, :description, activities: [], amenities: [], images: [])
-  end  
+    params.require(:location).permit(
+      :name, :address, :latitude, :longitude, :description,
+      activities: [], amenities: [], images: []
+    )
+  end
 
-  def ensure_admin
-    redirect_to root_path, alert: "Access denied!" unless current_user&.admin?
+  def authorize_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "Access denied!"
+    end
   end
 end

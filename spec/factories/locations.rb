@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :location do
-    name { "Test Location" }
-    address { "123 Test St" }
-    latitude { 40.7128 }
-    longitude { -74.0060 }
-    description { "A beautiful test location" }
+    sequence(:name) { |n| "Location #{n}" } # Ensure unique names
+    address { Faker::Address.full_address }
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
   end
 end

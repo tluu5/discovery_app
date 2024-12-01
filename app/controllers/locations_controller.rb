@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :set_location, only: %i[show edit update destroy]
 
-  # GET /locations or /locations.json
+  # GET /locations
   def index
     @locations = Location.all
 
@@ -23,11 +23,14 @@ class LocationsController < ApplicationController
     if params[:search].present?
       @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
     end
+
+    # Debugging Logs
+    logger.debug "Filtered Locations SQL Query: #{@locations.to_sql}"
+    logger.debug "Filtered Locations Results: #{@locations.to_a}"
   end
 
-  # GET /locations/1 or /locations/1.json
+  # GET /locations/:id
   def show
-    @location = Location.find(params[:id])
     @map_data = { lat: @location.latitude, lng: @location.longitude }
   end
 
@@ -36,96 +39,74 @@ class LocationsController < ApplicationController
     @location = Location.new
   end
 
-  # GET /locations/1/edit
-  def edit
-  end
+  # GET /locations/:id/edit
+  def edit; end
 
-  # POST /locations or /locations.json
+  # POST /locations
   def create
     @location = Location.new(location_params)
 
-    respond_to do |format|
-      if @location.save
-        assign_attributes_to_location
-        format.html { redirect_to location_url(@location), notice: "Location was successfully created." }
-        format.json { render :show, status: :created, location: @location }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.save
+      assign_attributes_to_location
+      redirect_to location_url(@location), notice: "Location was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /locations/1 or /locations/1.json
+  # PATCH/PUT /locations/:id
   def update
-    respond_to do |format|
-      if @location.update(location_params)
-        assign_attributes_to_location
+    if @location.update(location_params)
+      assign_attributes_to_location
 
-        # Remove only selected images
-        if params[:location][:remove_images].present?
-          params[:location][:remove_images].each do |image_id|
-            image = @location.images.find_by(id: image_id)
-            image.purge if image.present?
-          end
+      # Remove selected images
+      if params[:location][:remove_images].present?
+        params[:location][:remove_images].each do |image_id|
+          image = @location.images.find_by(id: image_id)
+          image&.purge
         end
-
-        format.html { redirect_to location_url(@location), notice: "Location was successfully updated." }
-        format.json { render :show, status: :ok, location: @location }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
       end
+
+      redirect_to location_url(@location), notice: "Location was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /locations/1 or /locations/1.json
+  # DELETE /locations/:id
   def destroy
-    @location.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to locations_url, notice: "Location was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @location.destroy
+    redirect_to locations_url, notice: "Location was successfully destroyed."
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_location
     @location = Location.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def location_params
     params.require(:location).permit(
-      :name,
-      :address,
-      :latitude,
-      :longitude,
-      :description,
-      # TODO: add back activities / amenities
-      # activities: [],
-      # amenities: [],
-      images: []
+      :name, :address, :latitude, :longitude, :description,
+      activities: [], amenities: [], images: []
     )
   end
 
   def assign_attributes_to_location
+    # Assign activities
     if params[:location][:activities].present?
-      # Find or create activities based on the provided names
       activities = Attribute.where(name: params[:location][:activities], category: "Activity")
       @location.activities = activities
     else
-      @location.activities = [] # Clear all activities if none are selected
+      @location.activities.clear
     end
 
+    # Assign amenities
     if params[:location][:amenities].present?
-      # Find or create amenities based on the provided names
       amenities = Attribute.where(name: params[:location][:amenities], category: "Amenity")
       @location.amenities = amenities
     else
-      @location.amenities = [] # Clear all amenities if none are selected
+      @location.amenities.clear
     end
   end
 end
