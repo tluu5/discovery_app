@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index]
 
   # Attributes Routes
-  resources :attributes, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :attributes, only: [:index, :new, :create, :edit, :update] do
     collection do
       get :available
     end
@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # API namespace with restricted access
   namespace :api do
     resources :locations, only: [:index]
   end

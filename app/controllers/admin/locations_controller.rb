@@ -59,11 +59,14 @@ class Admin::LocationsController < ApplicationController
   def assign_features(location)
     # Assign activities
     activity_features = Attribute.where(name: location_params[:activities], category: "Activity")
-    location.activities = activity_features
+    location.activities = activity_features.presence || []
 
     # Assign amenities
     amenity_features = Attribute.where(name: location_params[:amenities], category: "Amenity")
-    location.amenities = amenity_features
+    location.amenities = amenity_features.presence || []
+  rescue StandardError => e
+    Rails.logger.error "Error assigning features: #{e.message}"
+    flash.now[:alert] = "An error occurred while assigning features."
   end
 
   # Ensure only admins can access these actions

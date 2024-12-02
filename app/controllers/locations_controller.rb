@@ -21,7 +21,9 @@ class LocationsController < ApplicationController
 
     # Search by name
     if params[:search].present?
-      @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
+      # Sanitize input to prevent SQL injection
+      sanitized_search = ActiveRecord::Base.sanitize_sql_like(params[:search])
+      @locations = @locations.where("name ILIKE ?", "%#{sanitized_search}%")
     end
 
     respond_to do |format|
@@ -46,12 +48,12 @@ class LocationsController < ApplicationController
   # POST /locations
   def create
     @location = Location.new(location_params)
-  
+
     if @location.save
       assign_attributes_to_location # Assign activities and amenities only if save succeeds
       redirect_to location_url(@location), notice: "Location was successfully created."
     else
-      render :new, status: :unprocessable_entity # Consistent error handling
+      render :new, status: :unprocessable_entity
     end
   end
 

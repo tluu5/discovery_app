@@ -4,7 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  address     :string           not null
-#  description :string
+#  description :string           not null
 #  latitude    :float            not null
 #  longitude   :float            not null
 #  name        :string           not null
@@ -25,13 +25,6 @@ class Location < ApplicationRecord
 
   # Associations for features, activities, and amenities
   has_many :features, through: :location_attributes, source: :feature
-
-  # Virtual attributes to simplify input handling
-  attr_accessor :activity_names, :amenity_names
-
-  # Scoped associations for activities and amenities
-  has_many :activities, -> { where(attributes: { category: 'Activity' }) }, through: :location_attributes, source: :feature
-  has_many :amenities, -> { where(attributes: { category: 'Amenity' }) }, through: :location_attributes, source: :feature
 
   # Validations for core attributes
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
