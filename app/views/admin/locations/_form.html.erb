@@ -1,4 +1,5 @@
 <%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
+  <%# Display Errors %>
   <% if @location.errors.any? %>
     <div class="alert alert-danger">
       <h4>There were problems with the following fields:</h4>
@@ -11,12 +12,12 @@
   <% end %>
 
   <div class="form-inputs row g-3">
-    <!-- Location Name -->
+    <%# Name %>
     <div class="col-md-12">
       <%= f.input :name, label: "Location Name", placeholder: "Enter the name of the location", input_html: { class: "form-control" } %>
     </div>
 
-    <!-- Address and Coordinates -->
+    <%# Address and Coordinates %>
     <div class="col-md-8">
       <%= f.input :address, label: "Address", placeholder: "e.g., 123 Main St, Chicago, IL", input_html: { class: "form-control" } %>
     </div>
@@ -25,12 +26,12 @@
       <%= f.input :longitude, label: "Longitude", placeholder: "Enter the longitude", input_html: { class: "form-control" } %>
     </div>
 
-    <!-- Description -->
+    <%# Description %>
     <div class="col-12">
       <%= f.input :description, label: "Description", placeholder: "Provide a brief description of the location", input_html: { class: "form-control", rows: 3 } %>
     </div>
 
-    <!-- Activities -->
+    <%# Activities %>
     <div class="col-12">
       <%= f.label :activities, "Select Activities" %>
       <div>
@@ -43,7 +44,7 @@
       </div>
     </div>
 
-    <!-- Amenities -->
+    <%# Amenities %>
     <div class="col-12">
       <%= f.label :amenities, "Select Amenities" %>
       <div>
@@ -57,7 +58,7 @@
     </div>
   </div>
 
-  <!-- Existing Images (Only for Edit Action) -->
+  <%# Existing Images (Only for Edit Action) %>
   <% if @location.persisted? %>
     <div class="col-12 mt-4">
       <h5>Existing Images</h5>
@@ -77,7 +78,7 @@
     </div>
   <% end %>
 
-  <!-- Upload New Images -->
+  <%# Upload New Images %>
   <div class="col-12">
     <%= f.label :images, "Upload Images" %>
     <%= f.file_field :images, multiple: true, class: "form-control" %>
@@ -87,3 +88,4 @@
     <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>
+

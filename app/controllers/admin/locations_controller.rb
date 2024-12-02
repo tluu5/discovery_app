@@ -3,6 +3,21 @@ class Admin::LocationsController < ApplicationController
   before_action :authorize_admin
   before_action :set_location, only: %i[edit update destroy]
 
+  # GET /admin/locations
+  def index
+    @locations = Location.all
+  end
+
+  # GET /admin/locations/new
+  def new
+    @location = Location.new
+  end
+
+  # GET /admin/locations/:id/edit
+  def edit
+    @location = Location.find(params[:id])
+  end
+
   # POST /admin/locations
   def create
     @location = Location.new(location_params)
@@ -51,7 +66,7 @@ class Admin::LocationsController < ApplicationController
       :name, :address, :latitude, :longitude, :description,
       images: [], # Accept uploaded images
       activities: [], # Accept an array of activity strings
-      amenities: [] # Accept an array of amenity strings
+      amenities: [], # Accept an array of amenity strings
     )
   end
 
