@@ -42,9 +42,6 @@ locations = Location.create!([
     address: '2000 N Clark St, Chicago, IL 60614',
     latitude: 41.9214,
     longitude: -87.6513,
-    city: 'Chicago',
-    state: 'Illinois',
-    zip_code: '60614',
     description: 'A beautiful park with trails, picnic spots, and a zoo.'
   },
   {
@@ -52,9 +49,6 @@ locations = Location.create!([
     address: '2668 E 875th Rd, Oglesby, IL 61348',
     latitude: 41.3204,
     longitude: -88.9932,
-    city: 'Oglesby',
-    state: 'Illinois',
-    zip_code: '61348',
     description: 'Famous for its stunning rock formations and hiking trails.'
   },
   {
@@ -62,9 +56,6 @@ locations = Location.create!([
     address: '4400 N Lake Shore Dr, Chicago, IL 60640',
     latitude: 41.9637,
     longitude: -87.6387,
-    city: 'Chicago',
-    state: 'Illinois',
-    zip_code: '60640',
     description: 'A popular spot for kayaking, fishing, and beach activities.'
   },
   {
@@ -72,9 +63,6 @@ locations = Location.create!([
     address: '337 E Randolph St, Chicago, IL 60601',
     latitude: 41.8763,
     longitude: -87.6190,
-    city: 'Chicago',
-    state: 'Illinois',
-    zip_code: '60601',
     description: 'Known for its wide open spaces and iconic landmarks like Buckingham Fountain.'
   },
   {
@@ -82,9 +70,6 @@ locations = Location.create!([
     address: 'Cass Ave & Bluff Rd, Darien, IL 60561',
     latitude: 41.7458,
     longitude: -87.9955,
-    city: 'Darien',
-    state: 'Illinois',
-    zip_code: '60561',
     description: 'A preserve with scenic waterfalls and extensive hiking trails.'
   },
   {
@@ -92,9 +77,6 @@ locations = Location.create!([
     address: '1600 N 25 E, Chesterton, IN 46304',
     latitude: 41.6839,
     longitude: -87.0366,
-    city: 'Chesterton',
-    state: 'Indiana',
-    zip_code: '46304',
     description: 'A sandy paradise along Lake Michigan, perfect for camping and hiking.'
   },
   {
@@ -102,9 +84,6 @@ locations = Location.create!([
     address: '201 E Randolph St, Chicago, IL 60602',
     latitude: 41.8827,
     longitude: -87.6226,
-    city: 'Chicago',
-    state: 'Illinois',
-    zip_code: '60602',
     description: 'A public park known for the Cloud Gate sculpture and open-air concerts.'
   },
   {
@@ -112,9 +91,6 @@ locations = Location.create!([
     address: '525 S Park Blvd, Glen Ellyn, IL 60137',
     latitude: 41.8712,
     longitude: -88.0637,
-    city: 'Glen Ellyn',
-    state: 'Illinois',
-    zip_code: '60137',
     description: 'A rehabilitation center for native wildlife with interactive exhibits.'
   },
   {
@@ -122,9 +98,6 @@ locations = Location.create!([
     address: '4100 IL-53, Lisle, IL 60532',
     latitude: 41.8167,
     longitude: -88.0678,
-    city: 'Lisle',
-    state: 'Illinois',
-    zip_code: '60532',
     description: 'A nature preserve with themed gardens, trails, and seasonal exhibits.'
   },
   {
@@ -132,9 +105,6 @@ locations = Location.create!([
     address: '600 E Grand Ave, Chicago, IL 60611',
     latitude: 41.8917,
     longitude: -87.6077,
-    city: 'Chicago',
-    state: 'Illinois',
-    zip_code: '60611',
     description: 'A bustling waterfront destination with rides, eateries, and entertainment.'
   },
   {
@@ -142,9 +112,6 @@ locations = Location.create!([
     address: '2500 IL-178, Oglesby, IL 61348',
     latitude: 41.2851,
     longitude: -89.0113,
-    city: 'Oglesby',
-    state: 'Illinois',
-    zip_code: '61348',
     description: 'A park with unique geological formations and scenic hiking trails.'
   }
 ])
