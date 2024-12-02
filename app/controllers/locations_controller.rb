@@ -4,31 +4,31 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.all
-  
+
     # Filter by activities
     if params[:activities].present?
       @locations = @locations.joins(location_attributes: :feature)
-                             .where(attributes: { name: params[:activities], category: "Activity" })
+                             .where(features: { name: params[:activities], category: "Activity" })
                              .distinct
     end
-  
+
     # Filter by amenities
     if params[:amenities].present?
       @locations = @locations.joins(location_attributes: :feature)
-                             .where(attributes: { name: params[:amenities], category: "Amenity" })
+                             .where(features: { name: params[:amenities], category: "Amenity" })
                              .distinct
     end
-  
+
     # Search by name
     if params[:search].present?
       @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
     end
-  
+
     respond_to do |format|
       format.html
       format.json { render json: @locations, status: :ok }
     end
-  end  
+  end
 
   # GET /locations/:id
   def show
@@ -46,12 +46,12 @@ class LocationsController < ApplicationController
   # POST /locations
   def create
     @location = Location.new(location_params)
-
+  
     if @location.save
-      assign_attributes_to_location
+      assign_attributes_to_location # Assign activities and amenities only if save succeeds
       redirect_to location_url(@location), notice: "Location was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity # Consistent error handling
     end
   end
 
@@ -61,11 +61,9 @@ class LocationsController < ApplicationController
       assign_attributes_to_location
 
       # Remove selected images
-      if params[:location][:remove_images].present?
-        params[:location][:remove_images].each do |image_id|
-          image = @location.images.find_by(id: image_id)
-          image&.purge
-        end
+      params[:location][:remove_images]&.each do |image_id|
+        image = @location.images.find_by(id: image_id)
+        image&.purge
       end
 
       redirect_to location_url(@location), notice: "Location was successfully updated."
@@ -84,30 +82,32 @@ class LocationsController < ApplicationController
 
   def set_location
     @location = Location.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to locations_url, alert: "Location not found."
   end
 
   def location_params
     params.require(:location).permit(
       :name, :address, :latitude, :longitude, :description,
-      activities: [], amenities: [], images: []
+      activity_names: [], amenity_names: [], images: [], remove_images: []
     )
   end
 
   def assign_attributes_to_location
     # Assign activities
-    if params[:location][:activities].present?
-      activities = Attribute.where(name: params[:location][:activities], category: "Activity")
+    if params[:location][:activity_names].present?
+      activities = Attribute.where(name: params[:location][:activity_names], category: "Activity")
       @location.activities = activities
     else
       @location.activities.clear
     end
-  
+
     # Assign amenities
-    if params[:location][:amenities].present?
-      amenities = Attribute.where(name: params[:location][:amenities], category: "Amenity")
+    if params[:location][:amenity_names].present?
+      amenities = Attribute.where(name: params[:location][:amenity_names], category: "Amenity")
       @location.amenities = amenities
     else
       @location.amenities.clear
     end
-  end  
+  end
 end

@@ -26,6 +26,9 @@ class Location < ApplicationRecord
   # Associations for features, activities, and amenities
   has_many :features, through: :location_attributes, source: :feature
 
+  # Virtual attributes to simplify input handling
+  attr_accessor :activity_names, :amenity_names
+
   # Scoped associations for activities and amenities
   has_many :activities, -> { where(attributes: { category: 'Activity' }) }, through: :location_attributes, source: :feature
   has_many :amenities, -> { where(attributes: { category: 'Amenity' }) }, through: :location_attributes, source: :feature

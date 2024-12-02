@@ -1,19 +1,22 @@
 <%= simple_form_for(@location, html: { class: 'form-container', multipart: true }) do |f| %>
-  <div class="alert alert-danger">
-    <% if @location.errors.any? %>
+  <% if @location.errors.any? %>
+    <div class="alert alert-danger">
       <h4>There were problems with the following fields:</h4>
       <ul>
         <% @location.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <div class="form-inputs row g-3">
+    <!-- Location Name -->
     <div class="col-md-12">
       <%= f.input :name, label: "Location Name", placeholder: "Enter the name of the location", input_html: { class: "form-control" } %>
     </div>
+
+    <!-- Address and Coordinates -->
     <div class="col-md-8">
       <%= f.input :address, label: "Address", placeholder: "e.g., 123 Main St, Chicago, IL", input_html: { class: "form-control" } %>
     </div>
@@ -21,36 +24,40 @@
       <%= f.input :latitude, label: "Latitude", placeholder: "Enter the latitude", input_html: { class: "form-control" } %>
       <%= f.input :longitude, label: "Longitude", placeholder: "Enter the longitude", input_html: { class: "form-control" } %>
     </div>
+
+    <!-- Description -->
     <div class="col-12">
       <%= f.input :description, label: "Description", placeholder: "Provide a brief description of the location", input_html: { class: "form-control", rows: 3 } %>
     </div>
 
+    <!-- Activities -->
     <div class="col-12">
-      <%= f.label :activities, "Select Activities" %>
+      <%= f.label :activity_names, "Select Activities" %>
       <div>
         <% Attribute.where(category: 'Activity').each do |activity| %>
           <div class="form-check">
-            <%= check_box_tag "location[activities][]", activity.name, @location.activities.include?(activity), class: "form-check-input" %>
-            <%= label_tag "location_activities_#{activity.name}", activity.name, class: "form-check-label" %>
+            <%= check_box_tag "location[activity_names][]", activity.name, @location.activities.map(&:name).include?(activity.name), class: "form-check-input" %>
+            <%= label_tag "location_activity_names_#{activity.name}", activity.name, class: "form-check-label" %>
           </div>
         <% end %>
       </div>
     </div>
 
+    <!-- Amenities -->
     <div class="col-12">
-      <%= f.label :amenities, "Select Amenities" %>
+      <%= f.label :amenity_names, "Select Amenities" %>
       <div>
         <% Attribute.where(category: 'Amenity').each do |amenity| %>
           <div class="form-check">
-            <%= check_box_tag "location[amenities][]", amenity.name, @location.amenities.include?(amenity), class: "form-check-input" %>
-            <%= label_tag "location_amenities_#{amenity.name}", amenity.name, class: "form-check-label" %>
+            <%= check_box_tag "location[amenity_names][]", amenity.name, @location.amenities.map(&:name).include?(amenity.name), class: "form-check-input" %>
+            <%= label_tag "location_amenity_names_#{amenity.name}", amenity.name, class: "form-check-label" %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 
-  <!-- Existing Images -->
+  <!-- Images -->
   <div class="col-12 mt-4">
     <h5>Existing Images</h5>
     <% if @location.images.attached? %>
