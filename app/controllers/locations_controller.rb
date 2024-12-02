@@ -4,30 +4,31 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.all
-
-    # Filter by activity
+  
+    # Filter by activities
     if params[:activities].present?
       @locations = @locations.joins(location_attributes: :feature)
                              .where(attributes: { name: params[:activities], category: "Activity" })
                              .distinct
     end
-
+  
     # Filter by amenities
     if params[:amenities].present?
       @locations = @locations.joins(location_attributes: :feature)
                              .where(attributes: { name: params[:amenities], category: "Amenity" })
                              .distinct
     end
-
+  
     # Search by name
     if params[:search].present?
       @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
     end
-
-    # Debugging Logs
-    logger.debug "Filtered Locations SQL Query: #{@locations.to_sql}"
-    logger.debug "Filtered Locations Results: #{@locations.to_a}"
-  end
+  
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations, status: :ok }
+    end
+  end  
 
   # GET /locations/:id
   def show
@@ -88,7 +89,7 @@ class LocationsController < ApplicationController
   def location_params
     params.require(:location).permit(
       :name, :address, :latitude, :longitude, :description,
-      activities: [], amenities: [], images: [],
+      activities: [], amenities: [], images: []
     )
   end
 
@@ -100,7 +101,7 @@ class LocationsController < ApplicationController
     else
       @location.activities.clear
     end
-
+  
     # Assign amenities
     if params[:location][:amenities].present?
       amenities = Attribute.where(name: params[:location][:amenities], category: "Amenity")
@@ -108,5 +109,5 @@ class LocationsController < ApplicationController
     else
       @location.amenities.clear
     end
-  end
+  end  
 end

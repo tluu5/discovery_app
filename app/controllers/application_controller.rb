@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
   def after_update_path_for(resource)
     user_path(resource) # Assuming a profile page exists for the user
   end  
+
+  def custom_authenticate_user!
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: "You must sign in to perform this action."
+    end
+  end  
 end

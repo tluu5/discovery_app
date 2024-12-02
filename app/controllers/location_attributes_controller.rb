@@ -1,5 +1,5 @@
 class LocationAttributesController < ApplicationController
-  before_action :authenticate_user! # Ensure the user is authenticated
+  before_action :custom_authenticate_user!
   before_action :set_location_attribute, only: %i[show edit update destroy]
 
   # GET /location_attributes or /location_attributes.json

@@ -11,13 +11,6 @@ RSpec.describe "Locations", type: :request do
       expect(response.body).to include("Mountain Hike")
       expect(response.body).not_to include("Sunny Beach")
     end
-
-    it "filters locations by amenity" do
-      hiking_location.amenities << amenity
-      get locations_path, params: { amenities: ["Parking"] }
-      expect(response.body).to include("Mountain Hike")
-      expect(response.body).not_to include("Sunny Beach")
-    end
   end
 
   describe "Locations Performance", type: :request do

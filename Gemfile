@@ -6,6 +6,8 @@ ruby "3.2.1"
 gem "aws-sdk-s3", require: false
 gem "devise"
 gem "rails-controller-testing"
+gem 'kaminari'
+gem 'dev_toolbar'
 
 # Use Rails 7.1.3 or higher
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -82,4 +84,3 @@ gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem "simple_form"
 gem "carrierwave"
-

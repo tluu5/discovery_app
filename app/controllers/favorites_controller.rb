@@ -1,13 +1,13 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :custom_authenticate_user!
   before_action :set_favorite, only: [:destroy]
 
-  # GET /favorites or /favorites.json
+  # GET /favorites
   def index
-    @favorites = current_user.favorites.includes(:location) # Load all favorite locations for the logged-in user
+    @favorites = current_user.favorites.includes(:location)
   end
 
-  # POST /favorites or /favorites.json
+  # POST /favorites
   def create
     location = Location.find(params[:location_id])
     if current_user.favorites.exists?(location_id: location.id)
@@ -20,10 +20,10 @@ class FavoritesController < ApplicationController
         flash[:error] = "Could not add to favorites."
       end
     end
-    redirect_to favorites_path # Redirect to the favorites list
+    redirect_to favorites_path
   end
 
-  # DELETE /favorites/1 or /favorites/1.json
+  # DELETE /favorites/:id
   def destroy
     if @favorite
       @favorite.destroy
@@ -31,18 +31,16 @@ class FavoritesController < ApplicationController
     else
       flash[:alert] = "Location not found in your favorites."
     end
-    redirect_back(fallback_location: root_path)
-  end
+    redirect_to favorites_path # Ensure it redirects here
+  end  
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_favorite
     @favorite = current_user.favorites.find_by(location_id: params[:location_id])
   end
 
-  # Only allow a list of trusted parameters through.
   def favorite_params
-    params.require(:favorite).permit(:location_id) # Removed :user_id for security
+    params.require(:favorite).permit(:location_id)
   end
 end

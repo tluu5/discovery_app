@@ -1,12 +1,36 @@
 class Admin::LocationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :custom_authenticate_user!
   before_action :authorize_admin
   before_action :set_location, only: %i[edit update destroy]
 
   # GET /admin/locations
   def index
     @locations = Location.all
-  end
+  
+    # Filter by activities
+    if params[:activities].present?
+      @locations = @locations.joins(location_attributes: :feature)
+                             .where(features: { name: params[:activities], category: "Activity" })
+                             .distinct
+    end
+  
+    # Filter by amenities
+    if params[:amenities].present?
+      @locations = @locations.joins(location_attributes: :feature)
+                             .where(features: { name: params[:amenities], category: "Amenity" })
+                             .distinct
+    end
+  
+    # Search by name
+    if params[:search].present?
+      @locations = @locations.where("name ILIKE ?", "%#{params[:search]}%")
+    end
+  
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations, status: :ok }
+    end
+  end  
 
   # GET /admin/locations/new
   def new

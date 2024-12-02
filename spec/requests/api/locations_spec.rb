@@ -38,5 +38,25 @@ RSpec.describe "API Locations", type: :request do
         expect(result.first['name']).to eq('Beach')
       end
     end
+
+    context 'with pagination' do
+      before do
+        create_list(:location, 15) # Create 15 locations
+      end
+    
+      it 'returns paginated results' do
+        get api_locations_path, params: { page: 1, per_page: 5 }
+      
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response.length).to eq(5)
+      end      
+    
+      it 'returns the next page of results' do
+        get api_locations_path, params: { page: 2, per_page: 5 }
+      
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response.length).to eq(5) # Verify the second page contains 5 results
+      end      
+    end   
   end
 end
