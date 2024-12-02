@@ -1,4 +1,6 @@
-<%= render @location %>
+<h1><%= @location.name %></h1>
+<p><strong>Address:</strong> <%= @location.address %></p>
+<p><%= @location.description %></p>
 
 <% if @location.images.attached? %>
   <div class="d-flex flex-wrap mb-4">
@@ -10,18 +12,30 @@
   </div>
 <% end %>
 
+<p><strong>Activities:</strong> 
+  <% if @location.activities.any? %>
+    <%= @location.activities.map(&:name).join(', ') %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<p><strong>Amenities:</strong> 
+  <% if @location.amenities.any? %>
+    <%= @location.amenities.map(&:name).join(', ') %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
 <% if user_signed_in? %>
   <% if current_user.favorites.exists?(location: @location) %>
     <%= button_to 'Remove from Favorites', location_favorite_path(@location), method: :delete, class: 'btn btn-danger' %>
   <% else %>
     <%= button_to 'Add to Favorites', location_favorite_path(@location), method: :post, class: 'btn btn-primary' %>
   <% end %>
-<% end %>
-
-<% if flash[:notice] %>
-  <div class="alert alert-success"><%= flash[:notice] %></div>
-<% elsif flash[:alert] %>
-  <div class="alert alert-danger"><%= flash[:alert] %></div>
+<% else %>
+  <p><em>Sign in to add this location to your favorites.</em></p>
 <% end %>
 
 <div class="mt-4">

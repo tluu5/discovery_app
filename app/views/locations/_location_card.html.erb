@@ -21,11 +21,12 @@
     <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= location.name %></h5>
+      <p class="card-text"><strong>Address:</strong> <%= location.address %></p>
       <p class="card-text"><%= location.description %></p>
 
       <%# Display Activities %>
       <p class="card-text">
-        Activities: 
+        <strong>Activities:</strong> 
         <% if location.activities.any? %>
           <%= location.activities.map(&:name).join(', ') %>
         <% else %>
@@ -35,7 +36,7 @@
 
       <%# Display Amenities %>
       <p class="card-text">
-        Amenities: 
+        <strong>Amenities:</strong> 
         <% if location.amenities.any? %>
           <%= location.amenities.map(&:name).join(', ') %>
         <% else %>
