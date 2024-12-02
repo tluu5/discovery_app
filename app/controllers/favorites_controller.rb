@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_action :custom_authenticate_user!
+  before_action :authenticate_user! # Ensure user is logged in
   before_action :set_favorite, only: [:destroy]
 
   # GET /favorites
@@ -7,9 +7,15 @@ class FavoritesController < ApplicationController
     @favorites = current_user.favorites.includes(:location)
   end
 
-  # POST /favorites
+  # POST /locations/:location_id/favorite
   def create
-    location = Location.find(params[:location_id])
+    location = Location.find_by(id: params[:location_id])
+
+    if location.nil?
+      flash[:error] = "Location not found."
+      redirect_to locations_path and return
+    end
+
     if current_user.favorites.exists?(location_id: location.id)
       flash[:notice] = "Location already in your favorites."
     else
@@ -23,7 +29,7 @@ class FavoritesController < ApplicationController
     redirect_to favorites_path
   end
 
-  # DELETE /favorites/:id
+  # DELETE /locations/:location_id/favorite
   def destroy
     if @favorite
       @favorite.destroy
@@ -31,16 +37,12 @@ class FavoritesController < ApplicationController
     else
       flash[:alert] = "Location not found in your favorites."
     end
-    redirect_to favorites_path # Ensure it redirects here
-  end  
+    redirect_to favorites_path
+  end
 
   private
 
   def set_favorite
     @favorite = current_user.favorites.find_by(location_id: params[:location_id])
-  end
-
-  def favorite_params
-    params.require(:favorite).permit(:location_id)
   end
 end

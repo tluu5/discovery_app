@@ -5,10 +5,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     if params[:password].blank? && params[:password_confirmation].blank?
       # Update without password if no new password is provided
-      resource.update_without_password(params.except(:current_password))
+      unless resource.update_without_password(params.except(:current_password))
+        flash[:error] = "Failed to update your profile. Please check your inputs."
+        return false
+      end
     else
       # Update with password validation if the user provided a new password
-      resource.update_with_password(params)
+      unless resource.update_with_password(params)
+        flash[:error] = "Password update failed. Ensure your current password is correct."
+        return false
+      end
     end
-  end
+    true
+  end  
 end

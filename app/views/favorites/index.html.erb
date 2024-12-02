@@ -7,27 +7,32 @@
         <div class="col-md-4">
           <div class="card mb-4">
             <div class="card-body">
-              <h5 class="card-title"><%= link_to favorite.location.name, location_path(favorite.location) %></h5>
+              <%# Location Name and Link %>
+              <h5 class="card-title">
+                <%= link_to favorite.location.name, location_path(favorite.location), class: 'text-decoration-none' %>
+              </h5>
+              <%# Location Details %>
               <p class="card-text">
                 <strong>Address:</strong> <%= favorite.location.address %><br>
-                <strong>Description:</strong> <%= favorite.location.description %>
+                <strong>Description:</strong> <%= truncate(favorite.location.description, length: 50) %><br>
               </p>
-              <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm' %>
+
+              <%# Favorites Button %>
               <% if user_signed_in? %>
-                <% if current_user.favorites.exists?(location: favorite.location) %>
-                  <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger' %>
-                <% else %>
-                  <%= button_to 'Add to Favorites', location_favorite_path(favorite.location), method: :post, class: 'btn btn-primary' do %>
-                    <i class="fas fa-heart"></i> Add to Favorites
-                  <% end %>
-                <% end %>
+                <%= button_to 'Remove from Favorites', location_favorite_path(favorite.location), method: :delete, class: 'btn btn-danger btn-sm' %>
               <% end %>
+
+              <%# View Location Button %>
+              <%= link_to 'View Location', location_path(favorite.location), class: 'btn btn-info btn-sm mt-2' %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p>You have no favorite locations yet. <%= link_to 'Explore locations', locations_path, class: 'btn btn-info mr-2' %> to add your favorites!</p>
+    <p>
+      You have no favorite locations yet. 
+      <%= link_to 'Explore locations', locations_path, class: 'btn btn-info' %> to add your favorites!
+    </p>
   <% end %>
 </div>
