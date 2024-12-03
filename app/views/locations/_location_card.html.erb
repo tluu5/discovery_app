@@ -26,7 +26,7 @@
 
       <%# Display Activities %>
       <p class="card-text">
-        <strong>Activities:</strong> 
+        <strong>Activities:</strong>
         <% if location.activities.any? %>
           <%= location.activities.map(&:name).join(', ') %>
         <% else %>
@@ -36,7 +36,7 @@
 
       <%# Display Amenities %>
       <p class="card-text">
-        <strong>Amenities:</strong> 
+        <strong>Amenities:</strong>
         <% if location.amenities.any? %>
           <%= location.amenities.map(&:name).join(', ') %>
         <% else %>

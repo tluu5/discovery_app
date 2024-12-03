@@ -25,6 +25,8 @@ class Location < ApplicationRecord
 
   # Associations for features, activities, and amenities
   has_many :features, through: :location_attributes, source: :feature
+  has_many :activities, -> { where(category: 'Activity') }, through: :location_attributes, source: :feature
+  has_many :amenities, -> { where(category: 'Amenity') }, through: :location_attributes, source: :feature
 
   # Validations for core attributes
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
@@ -32,6 +34,26 @@ class Location < ApplicationRecord
   validates :latitude, presence: true, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }
   validates :longitude, presence: true, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }
 
+  # Scopes for filtering
+  scope :by_activity, ->(activity) {
+    joins(location_attributes: :feature)
+      .where(features: { name: activity, category: "Activity" })
+      .distinct
+  }
+
+  scope :by_amenity, ->(amenity) {
+    joins(location_attributes: :feature)
+      .where(features: { name: amenity, category: "Amenity" })
+      .distinct
+  }
+
+  scope :search_name, ->(search_term) {
+    sanitized_search = ActiveRecord::Base.sanitize_sql_like(search_term)
+    where("name ILIKE ?", "%#{sanitized_search}%")
+  }
+
   # Optional description validation
   validates :description, length: { maximum: 500 }, allow_blank: true
+
+  paginates_per 10 # Number of results per page
 end

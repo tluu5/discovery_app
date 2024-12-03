@@ -13,6 +13,7 @@
 #  index_location_attributes_on_location_id_and_feature_id  (location_id,feature_id) UNIQUE
 #
 class LocationAttribute < ApplicationRecord
+  # Associations
   belongs_to :location
   belongs_to :feature, class_name: 'Attribute', foreign_key: 'feature_id'
 

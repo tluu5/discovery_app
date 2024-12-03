@@ -7,21 +7,16 @@ class LocationsController < ApplicationController
 
     # Filter by activities
     if params[:activities].present?
-      @locations = @locations.joins(location_attributes: :feature)
-                             .where(features: { name: params[:activities], category: "Activity" })
-                             .distinct
+      @locations = @locations.joins(:activities).where(attributes: { name: params[:activities] }).distinct
     end
 
     # Filter by amenities
     if params[:amenities].present?
-      @locations = @locations.joins(location_attributes: :feature)
-                             .where(features: { name: params[:amenities], category: "Amenity" })
-                             .distinct
+      @locations = @locations.joins(:amenities).where(attributes: { name: params[:amenities] }).distinct
     end
 
     # Search by name
     if params[:search].present?
-      # Sanitize input to prevent SQL injection
       sanitized_search = ActiveRecord::Base.sanitize_sql_like(params[:search])
       @locations = @locations.where("name ILIKE ?", "%#{sanitized_search}%")
     end
