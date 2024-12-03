@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # Root route
   root to: 'locations#index'
 
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     namespace :admin do
       resources :locations, only: [:index, :new, :create, :edit, :update, :destroy]
-      resources :users
+      resources :users, only: [:index, :new, :create, :destroy]
     end
   end
 

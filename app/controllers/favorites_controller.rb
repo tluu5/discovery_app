@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user! # Ensure user is logged in
+  before_action :custom_authenticate_user!
   before_action :set_favorite, only: [:destroy]
 
   # GET /favorites
