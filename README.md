@@ -32,6 +32,14 @@ A web platform to discover outdoor activities in Chicago, providing curated info
 
 ---
 
+## Entity Relationship Diagram (ERD)
+
+Below is the data model for the application:
+
+![ERD][erd]
+
+---
+
 ## Setup and Installation Instructions:
 
 To get the project running locally, follow these steps:
@@ -188,3 +196,7 @@ The project includes a simple API for accessing locations and user data:
 ## Contact:
 
 Created by Brian Luu - feel free to reach out if you have questions or feedback!!!
+
+
+[def]: ./erd.png
+[erd]: ./erd.png
