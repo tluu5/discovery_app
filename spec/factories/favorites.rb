@@ -12,6 +12,11 @@
 #
 #  index_favorites_on_user_id_and_location_id  (user_id,location_id) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (location_id => locations.id)
+#  fk_rails_...  (user_id => users.id)
+#
 FactoryBot.define do
   factory :favorite do
     association :user

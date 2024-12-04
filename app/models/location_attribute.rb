@@ -12,6 +12,11 @@
 #
 #  index_location_attributes_on_location_id_and_feature_id  (location_id,feature_id) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (feature_id => attributes.id)
+#  fk_rails_...  (location_id => locations.id)
+#
 class LocationAttribute < ApplicationRecord
   # Associations
   belongs_to :location

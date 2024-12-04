@@ -10,7 +10,8 @@
 #
 # Indexes
 #
-#  index_attributes_on_name  (name) UNIQUE
+#  index_attributes_on_category  (category)
+#  index_attributes_on_name      (name) UNIQUE
 #
 FactoryBot.define do
   factory :attribute do
