@@ -1,9 +1,9 @@
 # Clear existing data
 User.destroy_all
-Location.destroy_all
-Attribute.destroy_all
 LocationAttribute.destroy_all
+Attribute.destroy_all
 Favorite.destroy_all
+Location.destroy_all
 
 puts "All data cleared!"
 
@@ -19,7 +19,7 @@ users = User.create!([
 
 puts "Created #{User.count} users!"
 
-# Create attributes (categories for activities and amenities)
+# Create attributes
 attributes = Attribute.create!([
   { name: 'Hiking', category: 'Activity' },
   { name: 'Fishing', category: 'Activity' },
@@ -78,6 +78,41 @@ locations = Location.create!([
     latitude: 41.6839,
     longitude: -87.0366,
     description: 'A sandy paradise along Lake Michigan, perfect for camping and hiking.'
+  },
+  {
+    name: 'Millennium Park',
+    address: '201 E Randolph St, Chicago, IL 60602',
+    latitude: 41.8827,
+    longitude: -87.6226,
+    description: 'A public park known for the Cloud Gate sculpture and open-air concerts.'
+  },
+  {
+    name: 'Willowbrook Wildlife Center',
+    address: '525 S Park Blvd, Glen Ellyn, IL 60137',
+    latitude: 41.8712,
+    longitude: -88.0637,
+    description: 'A rehabilitation center for native wildlife with interactive exhibits.'
+  },
+  {
+    name: 'Morton Arboretum',
+    address: '4100 IL-53, Lisle, IL 60532',
+    latitude: 41.8167,
+    longitude: -88.0678,
+    description: 'A nature preserve with themed gardens, trails, and seasonal exhibits.'
+  },
+  {
+    name: 'Navy Pier',
+    address: '600 E Grand Ave, Chicago, IL 60611',
+    latitude: 41.8917,
+    longitude: -87.6077,
+    description: 'A bustling waterfront destination with rides, eateries, and entertainment.'
+  },
+  {
+    name: 'Matthiessen State Park',
+    address: '2500 IL-178, Oglesby, IL 61348',
+    latitude: 41.2851,
+    longitude: -89.0113,
+    description: 'A park with unique geological formations and scenic hiking trails.'
   }
 ])
 
@@ -85,29 +120,17 @@ puts "Created #{Location.count} locations!"
 
 # Assign activities and amenities to locations
 LocationAttribute.create!([
-  # Lincoln Park
-  { location: locations[0], feature: attributes[0] }, # Lincoln Park: Hiking (Activity)
-  { location: locations[0], feature: attributes[4] }, # Lincoln Park: Picnic Area (Amenity)
-  { location: locations[0], feature: attributes[9] }, # Lincoln Park: Playground (Amenity)
-
-  # Starved Rock State Park
-  { location: locations[1], feature: attributes[0] }, # Starved Rock: Hiking (Activity)
-  { location: locations[1], feature: attributes[2] }, # Starved Rock: Camping (Activity)
-
-  # Montrose Beach
-  { location: locations[2], feature: attributes[1] }, # Montrose Beach: Fishing (Activity)
-  { location: locations[2], feature: attributes[3] }, # Montrose Beach: Kayaking (Activity)
-
-  # Grant Park
-  { location: locations[3], feature: attributes[4] }, # Grant Park: Picnic Area (Amenity)
-  { location: locations[3], feature: attributes[6] }, # Grant Park: Public Restrooms (Amenity)
-
-  # Waterfall Glen Forest Preserve
-  { location: locations[4], feature: attributes[0] }, # Waterfall Glen: Hiking (Activity)
-
-  # Indiana Dunes State Park
-  { location: locations[5], feature: attributes[2] }, # Indiana Dunes: Camping (Activity)
-  { location: locations[5], feature: attributes[3] }  # Indiana Dunes: Kayaking (Activity)
+  { location: locations[0], feature: attributes[0] }, # Lincoln Park: Hiking
+  { location: locations[1], feature: attributes[0] }, # Starved Rock: Hiking
+  { location: locations[2], feature: attributes[1] }, # Montrose Beach: Fishing
+  { location: locations[3], feature: attributes[4] }, # Grant Park: Picnic Area
+  { location: locations[4], feature: attributes[5] }, # Waterfall Glen: Hiking Trail
+  { location: locations[5], feature: attributes[2] }, # Indiana Dunes: Camping
+  { location: locations[6], feature: attributes[8] }, # Millennium Park: Dog-Friendly
+  { location: locations[7], feature: attributes[9] }, # Willowbrook: Playground
+  { location: locations[8], feature: attributes[0] }, # Morton Arboretum: Hiking
+  { location: locations[9], feature: attributes[7] }, # Navy Pier: BBQ Grills
+  { location: locations[10], feature: attributes[0] } # Matthiessen State Park: Hiking
 ])
 
 puts "Assigned attributes to locations!"
@@ -115,13 +138,10 @@ puts "Assigned attributes to locations!"
 # Create favorites
 Favorite.create!([
   { user: users[0], location: locations[0] },
-  { user: users[0], location: locations[1] },
-  { user: users[1], location: locations[2] },
-  { user: users[1], location: locations[3] },
-  { user: users[2], location: locations[4] },
-  { user: users[2], location: locations[5] },
-  { user: users[3], location: locations[0] },
-  { user: users[4], location: locations[1] },
+  { user: users[1], location: locations[1] },
+  { user: users[2], location: locations[2] },
+  { user: users[3], location: locations[3] },
+  { user: users[4], location: locations[4] },
   { user: users[5], location: locations[5] }
 ])
 

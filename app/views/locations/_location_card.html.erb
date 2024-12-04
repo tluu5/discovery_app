@@ -1,12 +1,32 @@
 <div class="col-md-4">
   <div class="card mb-4">
+    <% if location.images.attached? %>
+      <div id="carousel-<%= location.id %>" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% location.images.each_with_index do |image, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <%= image_tag image, class: "d-block w-100", alt: location.name %>
+            </div>
+          <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= location.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= location.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= location.name %></h5>
+      <p class="card-text"><strong>Address:</strong> <%= location.address %></p>
       <p class="card-text"><%= location.description %></p>
 
       <%# Display Activities %>
       <p class="card-text">
-        Activities: 
+        <strong>Activities:</strong>
         <% if location.activities.any? %>
           <%= location.activities.map(&:name).join(', ') %>
         <% else %>
@@ -16,7 +36,7 @@
 
       <%# Display Amenities %>
       <p class="card-text">
-        Amenities: 
+        <strong>Amenities:</strong>
         <% if location.amenities.any? %>
           <%= location.amenities.map(&:name).join(', ') %>
         <% else %>
@@ -27,5 +47,4 @@
       <%= link_to 'View Location', location_path(location), class: 'btn btn-primary' %>
     </div>
   </div>
-
 </div>

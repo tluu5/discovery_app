@@ -1,0 +1,46 @@
+<h2>Edit Your Profile</h2>
+
+<%= form_with model: @user, url: registration_path(@user), method: :put, local: true do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There were errors:</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :email, "Email" %>
+    <%= f.email_field :email, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :username, "Username" %>
+    <%= f.text_field :username, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password, "New Password" %>
+    <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+    <small class="form-text text-muted">Leave blank if you don't want to change it</small>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password_confirmation, "Confirm New Password" %>
+    <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :current_password, "Current Password" %>
+    <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password", required: true %>
+    <small class="form-text text-muted">We need your current password to confirm changes</small>
+  </div>
+
+  <div class="mt-4">
+    <%= f.submit "Update Profile", class: "btn btn-primary" %>
+    <%= link_to "Cancel", root_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

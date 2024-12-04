@@ -1,42 +1,51 @@
 class AttributesController < ApplicationController
-  before_action :set_attribute, only: %i[show edit update destroy]
+  before_action :set_attribute, only: %i[edit update destroy]
 
   def available
     @attributes = Attribute.all
     render json: @attributes
   end  
 
-  # GET /attributes or /attributes.json
+  # GET /attributes
   def index
     @attributes = Attribute.all
   end
 
-  # POST /attributes or /attributes.json
+  # GET /attributes/new
+  def new
+    @attribute = Attribute.new
+  end
+
+  # POST /attributes
   def create
     @attribute = Attribute.new(attribute_params)
 
     if @attribute.save
-      redirect_to attribute_url(@attribute), notice: "Attribute was successfully created."
+      redirect_to attributes_path, notice: "Attribute was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /attributes/1 or /attributes/1.json
+  # GET /attributes/:id/edit
+  def edit
+  end
+
+  # PATCH/PUT /attributes/:id
   def update
     if @attribute.update(attribute_params)
-      redirect_to attribute_url(@attribute), notice: "Attribute was successfully updated."
+      redirect_to attributes_path, notice: "Attribute was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /attributes/1 or /attributes/1.json
+  # DELETE /attributes/:id
   def destroy
     if @attribute.destroy
-      redirect_to attributes_url, notice: "Attribute was successfully destroyed."
+      redirect_to attributes_path, notice: "Attribute was successfully destroyed."
     else
-      redirect_to attributes_url, alert: "Failed to delete attribute. It might be associated with other records."
+      redirect_to attributes_path, alert: "Failed to delete attribute. It might be associated with other records."
     end
   end
 

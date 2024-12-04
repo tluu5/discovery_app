@@ -1,4 +1,9 @@
-/* Base Reset and General Styles */
+/* 
+  *= require bootstrap
+  *= require_tree .
+  *= require_self
+*/
+
 * {
   margin: 0;
   padding: 0;

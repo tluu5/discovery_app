@@ -1,9 +1,20 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :custom_authenticate_user!
   before_action :ensure_admin
 
   def index
     @users = User.page(params[:page]).per(10) # Add pagination to improve performance
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      UserMailer.welcome_email(@user).deliver_now # Send the welcome email
+      redirect_to admin_users_path, notice: "User created and welcome email sent."
+    else
+      flash.now[:alert] = "Failed to create user."
+      render :new
+    end
   end
 
   def destroy
@@ -19,6 +30,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 
   def ensure_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.admin?

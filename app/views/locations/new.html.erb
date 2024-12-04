@@ -1,6 +1,17 @@
 <h1 class="my-4 text-center">Add a New Location</h1>
 <p class="text-center text-muted">Please fill in the details below to add a new location to the map.</p>
 
+<div class="alert alert-danger">
+  <% if @location.errors.any? %>
+    <h4>There were problems with the following fields:</h4>
+    <ul>
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
 <%= render "form", location: @location %>
 
 <div class="text-center mt-4">
