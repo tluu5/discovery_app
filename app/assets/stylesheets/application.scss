@@ -1,0 +1,144 @@
+// Entry point for your Sass build
+@import "bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5 !important; /* Light gray for a subtle nature-themed background */
+  color: #333;
+  padding-top: 70px; /* Offset to ensure content doesn't get blocked by the fixed navbar */
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #4CAF50 !important; /* Green for a nature theme */
+  border-bottom: 2px solid #388E3C !important;
+  z-index: 10;
+}
+
+.navbar a.nav-link {
+  color: #fff !important;
+}
+
+.navbar a.nav-link:hover {
+  color: #c8e6c9 !important; /* Lighter green for hover effect */
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  border-color: #fff !important;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+/* Link Styles */
+a {
+  color: #388E3C !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1b5e20 !important;
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #4CAF50 !important;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #388E3C !important;
+}
+
+.btn-danger {
+  background-color: #f44336 !important;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f !important;
+}
+
+/* Card Component Styling */
+.card {
+  border: 1px solid #ddd !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease;
+  background-color: #fff !important;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Container Styles */
+.container {
+  margin-top: 20px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.form-inputs {
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  text-align: center;
+}
+
+/* Flash Messages Styling */
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #4CAF50;
+  color: #fff;
+}
