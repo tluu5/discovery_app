@@ -1,6 +1,4 @@
 // Entry point for your Sass build
-@use "bootstrap" as *;
-
 * {
   margin: 0;
   padding: 0;
