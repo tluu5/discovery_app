@@ -152,8 +152,6 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
-    cssbundling-rails (1.4.1)
-      railties (>= 6.0.0)
     csv (3.3.0)
     database_cleaner-active_record (2.2.0)
       activerecord (>= 5.a)
@@ -538,7 +536,6 @@ DEPENDENCIES
   bootstrap (~> 5.3)
   capybara
   carrierwave
-  cssbundling-rails
   database_cleaner-active_record
   debug
   dev_toolbar

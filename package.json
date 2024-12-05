@@ -5,7 +5,5 @@
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.css:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
-    "devDependencies": {
-      "sass": "^1.57.1"
-    }
-  }
+  "devDependencies": {}
+}
