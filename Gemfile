@@ -10,7 +10,6 @@ gem 'kaminari'
 gem 'dev_toolbar'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
-gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails'
 gem 'ransack'
 gem 'rails_admin'
