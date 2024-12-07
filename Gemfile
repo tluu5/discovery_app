@@ -10,7 +10,6 @@ gem 'kaminari'
 gem 'dev_toolbar'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
-gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails'
 gem 'ransack'
 gem 'rails_admin'
@@ -90,4 +89,4 @@ gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem "simple_form"
 gem "carrierwave"
-gem "cssbundling-rails"
+gem 'mini_racer', platforms: :ruby
