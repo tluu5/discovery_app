@@ -12,7 +12,7 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'sassc-rails'
 gem 'ransack'
-gem 'rails_admin'
+#gem 'rails_admin'
 
 # Use Rails 7.1.3 or higher
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
