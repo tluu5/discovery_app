@@ -17,6 +17,20 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "User successfully updated."
+    else
+      flash.now[:alert] = "Failed to update user. Please check the form for errors."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
 
@@ -32,8 +46,8 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+    params.require(:user).permit(:email, :username, :password, :password_confirmation)
+  end  
 
   def ensure_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.admin?
