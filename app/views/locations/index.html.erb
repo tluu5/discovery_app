@@ -3,41 +3,58 @@
 <%= form_with url: locations_path, method: :get, local: true, class: "form-inline mb-4" do %>
   <div class="form-group mr-2">
     <%= label_tag :search, "Search by Name", class: "mr-2" %>
-    <%= text_field_tag :search, params[:search], class: "form-control" %>
+    <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Enter location name" %>
   </div>
+
   <div class="form-group mr-2">
     <%= label_tag :activities, "Filter by Activities", class: "mr-2" %>
     <div>
-      <% ['Hiking', 'Fishing', 'Camping', 'Kayaking'].each do |activity| %>
-        <div class="form-check form-check-inline">
-          <%= check_box_tag "activities[]", activity, params[:activities]&.include?(activity), class: "form-check-input" %>
-          <%= label_tag "activity_#{activity}", activity, class: "form-check-label" %>
-        </div>
+      <% if @activities.present? %>
+        <% @activities.each do |activity| %>
+          <div class="form-check form-check-inline">
+            <%= check_box_tag "activities[]", activity, params[:activities]&.include?(activity), class: "form-check-input", aria: { label: "Filter by #{activity}" } %>
+            <%= label_tag "activity_#{activity}", activity, class: "form-check-label" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">No activities available for filtering.</p>
       <% end %>
     </div>
   </div>
+
   <div class="form-group mr-2">
     <%= label_tag :amenities, "Filter by Amenities", class: "mr-2" %>
     <div>
-      <% ['Picnic Area', 'Dog-Friendly', 'BBQ Grills', 'Public Restrooms', 'Hiking Trail', 'Playground'].each do |amenity| %>
-        <div class="form-check form-check-inline">
-          <%= check_box_tag "amenities[]", amenity, params[:amenities]&.include?(amenity), class: "form-check-input" %>
-          <%= label_tag "amenity_#{amenity}", amenity, class: "form-check-label" %>
-        </div>
+      <% if @amenities.present? %>
+        <% @amenities.each do |amenity| %>
+          <div class="form-check form-check-inline">
+            <%= check_box_tag "amenities[]", amenity, params[:amenities]&.include?(amenity), class: "form-check-input", aria: { label: "Filter by #{amenity}" } %>
+            <%= label_tag "amenity_#{amenity}", amenity, class: "form-check-label" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">No amenities available for filtering.</p>
       <% end %>
     </div>
   </div>
+
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
 <% if @locations.empty? %>
-  <p>No locations found. Please try a different search or filter.</p>
+  <p class="mt-4">No locations found. Please try a different search or filter.</p>
 <% else %>
-  <div class="row">
+  <div class="row mt-4">
     <% @locations.each do |location| %>
       <%= render partial: 'locations/location_card', locals: { location: location } %>
     <% end %>
   </div>
+
+  <div class="mt-4">
+    <%= paginate @locations %>
+  </div>
 <% end %>
 
-<%= link_to "New location", new_location_path, class: "btn btn-success mt-4" %>
+<div class="mt-4 d-flex justify-content-between">
+  <%= link_to "New Location", new_location_path, class: "btn btn-success" %>
+</div>

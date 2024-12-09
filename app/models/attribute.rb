@@ -14,7 +14,7 @@
 #  index_attributes_on_name      (name) UNIQUE
 #
 class Attribute < ApplicationRecord
-  has_many :location_attributes
+  has_many :location_attributes, foreign_key: 'feature_id', dependent: :destroy
   has_many :locations, through: :location_attributes
 
   # Ensure name and category are present

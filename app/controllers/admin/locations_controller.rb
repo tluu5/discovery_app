@@ -5,8 +5,34 @@ class Admin::LocationsController < ApplicationController
 
   # GET /admin/locations
   def index
+    @activities = Attribute.where(category: 'activity').pluck(:name)
+    @amenities = Attribute.where(category: 'amenity').pluck(:name)
+  
     @locations = Location.all
-  end
+  
+    # Filter by activities
+    if params[:activities].present?
+      @locations = @locations.joins(:location_attributes).where(location_attributes: { feature_id: Attribute.where(name: params[:activities], category: 'activity').pluck(:id) }).distinct
+    end
+  
+    # Filter by amenities
+    if params[:amenities].present?
+      @locations = @locations.joins(:location_attributes).where(location_attributes: { feature_id: Attribute.where(name: params[:amenities], category: 'amenity').pluck(:id) }).distinct
+    end
+  
+    # Search by name
+    if params[:search].present?
+      sanitized_search = ActiveRecord::Base.sanitize_sql_like(params[:search])
+      @locations = @locations.where("name ILIKE ?", "%#{sanitized_search}%")
+    end
+  
+    @locations = @locations.page(params[:page]).per(10)
+  
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations, status: :ok }
+    end
+  end  
 
   # GET /admin/locations/new
   def new
