@@ -25,9 +25,7 @@ A web platform to discover outdoor activities in Chicago, providing curated info
 ## Features:
 
 - **Search and Filter**: Find locations by activity type and amenities such as restrooms, picnic areas, or hiking trails.
-- **Interactive Map**: View outdoor spots on a dynamic map, with clickable pins to discover locations nearby.
 - **Favorites**: Save favorite spots for quick access later.
-- **User Reviews**: Read and leave reviews on different outdoor spots.
 - **Admin Tools**: Admins can add, edit, or remove location entries to keep the database accurate and up-to-date. They can also moderate user reviews.
 
 ---
@@ -96,13 +94,6 @@ Open your browser and navigate to http://localhost:3000.
 ---
 
 ## Configuration:
-
-Environment Variables
-Create a .env file in the root directory to set up environment variables like the Google Maps API key:
-
-```
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
-```
 
 Database Configuration
 The database uses PostgreSQL. Ensure that your local environment has PostgreSQL installed and running.
