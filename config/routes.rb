@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # Root route
-  root to: 'locations#index'
+  root to: "pages#home"
 
   # Devise Routes (Custom Controller for Registrations)
   devise_for :users, controllers: {
@@ -30,7 +29,8 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     namespace :admin do
       resources :locations, only: [:index, :new, :create, :edit, :update, :destroy]
-      resources :users, only: [:index, :new, :create, :destroy]
+      resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
+      resources :attributes
     end
   end
 

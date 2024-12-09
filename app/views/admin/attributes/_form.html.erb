@@ -1,0 +1,13 @@
+<%= form_with model: [:admin, attribute], local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category, "Category" %>
+    <%= form.select :category, ["Activity", "Amenity"], {}, class: "form-control", required: true %>
+  </div>
+
+  <%= form.submit class: "btn btn-primary" %>
+<% end %>

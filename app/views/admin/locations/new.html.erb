@@ -2,6 +2,8 @@
 
 <%= form_with model: @location, url: admin_locations_path do |form| %>
   <%= render "form", location: @location %>
-  <%= form.submit "Create Location", class: "btn btn-primary mt-3" %>
 <% end %>
 
+<div class="text-center mt-4">
+  <%= link_to "Back to Locations", locations_path, class: "btn btn-info mr-2" %>
+</div>

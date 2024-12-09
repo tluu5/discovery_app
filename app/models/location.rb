@@ -18,6 +18,8 @@
 class Location < ApplicationRecord
   # Attachments
   has_many_attached :images
+  attr_accessor :remove_images
+
 
   # Associations
   has_many :favorites, dependent: :destroy
@@ -56,4 +58,16 @@ class Location < ApplicationRecord
   validates :description, length: { maximum: 500 }, allow_blank: true
 
   paginates_per 10 # Number of results per page
+
+  before_save :remove_selected_images
+
+  private
+
+  def remove_selected_images
+    return if remove_images.blank?
+
+    remove_images.each do |image_id|
+      images.find_by(id: image_id)&.destroy
+    end
+  end
 end
