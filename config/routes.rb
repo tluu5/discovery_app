@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Root route
-  root to: 'locations#index'
+  root to: "pages#home"
 
   # Devise Routes (Custom Controller for Registrations)
   devise_for :users, controllers: {
