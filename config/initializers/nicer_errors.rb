@@ -21,8 +21,8 @@ module ActionDispatch
         nicer_message = nicer_message.sub('ApplicationController::','')
         nicer_message = nicer_message.sub('uninitialized constant','undefined class')
         nicer_message = nicer_message.sub('undefined local variable or method','unrecognized')
-        nicer_message = nicer_message.sub(/ \(/,'')
-        nicer_message = nicer_message.sub(/did you mean/, 'Did you mean')
+        nicer_message = nicer_message.sub(' (','')
+        nicer_message = nicer_message.sub('did you mean', 'Did you mean')
 
         route_line = e.backtrace.detect { |line| line !~ /\/gems/ }.sub(/^[^\/]+/,'')
         route_line.sub!(/:in .+/,'')

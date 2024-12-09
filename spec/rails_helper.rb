@@ -56,7 +56,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   # Fixture settings
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
   # Infer test type based on file location

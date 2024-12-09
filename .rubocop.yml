@@ -1,1 +1,15 @@
+AllCops:
+  NewCops: enable
+Gemspec/AddRuntimeDependency:
+  Enabled: true
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+Style/BlockForwarding:
+  Enabled: true
+Style/HashConversion:
+  Enabled: true
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+# Add other flagged cops here as needed
 inherit_from: .rubocop_todo.yml
