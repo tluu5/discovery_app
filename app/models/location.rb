@@ -20,7 +20,6 @@ class Location < ApplicationRecord
   has_many_attached :images
   attr_accessor :remove_images
 
-
   # Associations
   has_many :favorites, dependent: :destroy
   has_many :location_attributes, dependent: :destroy

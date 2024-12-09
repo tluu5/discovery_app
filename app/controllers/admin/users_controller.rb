@@ -47,7 +47,7 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :username, :password, :password_confirmation)
-  end  
+  end
 
   def ensure_admin
     redirect_to root_path, alert: "Access denied!" unless current_user&.admin?
