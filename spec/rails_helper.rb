@@ -11,7 +11,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 
 # Load support files
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |file| require file }
 
 # Ensure migrations are up to date
 begin
