@@ -1,5 +1,14 @@
 require "rails_helper"
 
+RSpec.describe "Locations API", type: :request do
+  describe "GET /locations" do
+    it "returns a list of locations" do
+      get '/locations'
+      expect(response).to have_http_status(:ok)
+    end
+  end
+end
+
 RSpec.describe "Locations", type: :request do
   let!(:hiking_location) { create(:location, name: "Mountain Hike") }
   let!(:beach_location) { create(:location, name: "Sunny Beach") }

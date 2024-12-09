@@ -55,10 +55,10 @@ cd outdoor-activity-discovery
 ---
 
 ## Install Dependencies:
+Run the following command to install all required gems:
 
 ```
 bundle install
-yarn install
 ```
 
 ---
@@ -84,6 +84,14 @@ rails server
 ## Visit the app:
 
 Open your browser and navigate to http://localhost:3000.
+
+---
+
+## Contribution Guidelines
+- Fork the repository and clone it locally.
+- Create a new branch for your feature/fix.
+- Ensure tests pass before submitting a pull request.
+- Follow coding conventions: use snake_case for methods and variables.
 
 ---
 
