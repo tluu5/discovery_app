@@ -5,14 +5,14 @@ class LocationsController < ApplicationController
   def index
     @activities = Attribute.where(category: 'activity').pluck(:name)
     @amenities = Attribute.where(category: 'amenity').pluck(:name)
-
-    @locations = LocationFilterService.new(Location.all, params).call
-
+  
+    @locations = LocationFilterService.new(Location.all, params).call.page(params[:page]).per(10)
+  
     respond_to do |format|
       format.html
       format.json { render json: @locations, status: :ok }
     end
-  end
+  end  
 
   def show
     @map_data = { lat: @location.latitude, lng: @location.longitude }
