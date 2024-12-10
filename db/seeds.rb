@@ -21,16 +21,16 @@ puts "Created #{User.count} users!"
 
 # Create attributes with normalized categories
 attributes = Attribute.create!([
-  { name: 'Hiking', category: 'activity' },
-  { name: 'Fishing', category: 'activity' },
-  { name: 'Camping', category: 'activity' },
-  { name: 'Kayaking', category: 'activity' },
-  { name: 'Picnic Area', category: 'amenity' },
-  { name: 'Hiking Trail', category: 'amenity' },
-  { name: 'Public Restrooms', category: 'amenity' },
-  { name: 'BBQ Grills', category: 'amenity' },
-  { name: 'Dog-Friendly', category: 'amenity' },
-  { name: 'Playground', category: 'amenity' }
+  { name: 'Hiking', category: 'Activity' },
+  { name: 'Fishing', category: 'Activity' },
+  { name: 'Camping', category: 'Activity' },
+  { name: 'Kayaking', category: 'Activity' },
+  { name: 'Picnic Area', category: 'Amenity' },
+  { name: 'Hiking Trail', category: 'Amenity' },
+  { name: 'Public Restrooms', category: 'Amenity' },
+  { name: 'BBQ Grills', category: 'Amenity' },
+  { name: 'Dog-Friendly', category: 'Amenity' },
+  { name: 'Playground', category: 'Amenity' }
 ])
 
 puts "Created #{Attribute.count} attributes!"
