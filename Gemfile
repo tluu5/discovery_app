@@ -65,6 +65,7 @@ group :development do
   gem "rails-erd"
   gem "draft_generators"
   gem "grade_runner"
+   gem "letter_opener" #added for testing
 end
 
 group :test do

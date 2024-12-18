@@ -1,4 +1,4 @@
-module Api
+module Api  # It seems like all locations_controllers can be unified and the different data can be returned using pundit.
   class Api::LocationsController < ApplicationController
     def index
       if params[:page].present? && params[:per_page].present?
