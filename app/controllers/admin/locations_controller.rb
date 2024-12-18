@@ -10,7 +10,7 @@ class Admin::LocationsController < ApplicationController
 
     @locations = Location.all
 
-    # Filter by activities
+    # Filter by activities - This filtering can be done in the model
     if params[:activities].present?
       @locations = @locations.joins(:location_attributes).where(location_attributes: { feature_id: Attribute.where(name: params[:activities], category: 'activity').pluck(:id) }).distinct
     end

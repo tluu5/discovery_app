@@ -32,7 +32,7 @@ RSpec.describe 'Locations Management', type: :feature do
     fill_in 'Address', with: '123 Test St, Test City'
     fill_in 'Latitude', with: '40.7128'
     fill_in 'Longitude', with: '-74.0060'
-    fill_in 'Description', with: 'A great place to visit.'
+    # fill_in 'Description', with: 'A great place to visit.' Fix yur tests to match the current db state
     click_button 'Create Location'
     expect(page).to have_content('Location was successfully created.')
     expect(page).to have_content('Test Location')

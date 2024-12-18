@@ -49,7 +49,7 @@ class User < ApplicationRecord
     raise e
   end
 
-  after_create :send_welcome_email
+  after_create :send_welcome_email # Make sure to move this up on the document for readability
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_later

@@ -34,7 +34,7 @@ A web platform to discover outdoor activities in Chicago, providing curated info
 
 Below is the data model for the application:
 
-![ERD][erd]
+![ERD][erd] <!--Wrong syntax: ![alt](path) . Make sure your code works before you commit.-->
 
 ---
 
@@ -136,7 +136,7 @@ Write clear commit messages.
 
 ---
 
-## Entity Relationship Diagram (ERD):
+## Entity Relationship Diagram (ERD): # Why do you have two ERD headers?
 
 Below is the ERD for the project:
 

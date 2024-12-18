@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :location_attributes, only: [:create, :destroy]
 
   # Admin namespace with authentication restriction
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, lambda { |u| u.admin? } do #Nice use of lambda
     namespace :admin do
       resources :locations, only: [:index, :new, :create, :edit, :update, :destroy]
       resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   end
 
   # API namespace with restricted access
-  namespace :api do
+  namespace :api do 
     resources :locations, only: [:index]
   end
 end
